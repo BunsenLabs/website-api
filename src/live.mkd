@@ -1,0 +1,29 @@
+[SigningKey]: <http://pkg.2ion.eu/BunsenLabs-RELEASE.asc>
+
+Welcome to the BunsenLabs Linux Project's package and distribution
+server!
+
+In order to include our Debian repository into your local system, you
+need to set up a file at
+<monospace>/etc/apt/sources.list.d/bunsen.list</monospace> with the
+following contents:
+
+~~~
+deb http://pkg.2ion.eu/debian bunsen-hydrogen/
+~~~
+
+Next, add the repository's [signing key][SigningKey] and update the
+package index:
+
+~~~ { .bash }
+wget http://pkg.2ion.eu/BunsenLabs-RELEASE.asc
+apt-key add BunsenLabs-RELEASE.asc
+apt-get update
+~~~
+
+You may now install <monospace>bunsen-\*</monospace> packages as usual.
+Our key's fingerprint is
+
+~~~~~
+3172 4784 0522 7490 BBB7  43E6 A067 3F72 FE62 D9C5 
+~~~~~

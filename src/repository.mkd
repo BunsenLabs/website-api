@@ -1,0 +1,37 @@
+[SigningKey]: <http://pkg.2ion.eu/BunsenLabs-RELEASE.asc>
+
+In order to include our Debian repository into your local system, you
+need to set up a file at `/etc/apt/sources.list.d/bunsen.list` with the
+following contents:
+
+~~~
+deb http://pkg.2ion.eu/debian bunsen-hydrogen/
+~~~
+
+Next, fetch and verify the repository's [signing key][SigningKey]:
+
+~~~ { .bash }
+wget http://pkg.2ion.eu/BunsenLabs-RELEASE.asc
+gpg --with-fingerprint BunsenLabs-RELEASE.asc
+~~~
+
+The key's fingerprint as displayed by gpg should be identical with the
+following hexstring:
+
+~~~~~
+3172 4784 0522 7490 BBB7  43E6 A067 3F72 FE62 D9C5 
+~~~~~
+
+If that is not the case, you have got the wrong key. Use a safe,
+non-intercepted internet connection in order to retrieve the correct key
+file.
+
+Finally, add the key to APT and update the package index:
+
+~~~ { .bash }
+apt-key add BunsenLabs-RELEASE.asc
+apt-get update
+~~~
+
+You may now install <monospace>bunsen-\*</monospace> packages provided
+by the repository.

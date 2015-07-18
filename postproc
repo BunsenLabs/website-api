@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+
+for PROC in ./postproc.d/*.sh ; do
+  "$PROC" "$(readlink -f "$1")"
+done
