@@ -34,7 +34,9 @@ ARGV=--email-obfuscation=javascript \
 DESTDIR=dst
 
 # Provides page titles
-include config/env.mk
+include config/pagetitles.mk
+
+rebuild: clean checkout
 
 checkout: all
 	@rsync -au --human-readable $(ASSETS) $(DESTDIR)
@@ -51,4 +53,6 @@ clean:
 	rm -fr dst/*
 
 deploy: checkout
-	@echo Not implemented.
+	$(info deploy: not implemented)
+
+.PHONY: rebuild checkout all clean deploy
