@@ -36,22 +36,16 @@ DESTDIR=dst
 # Provides page titles
 include config/pagetitles.mk
 
+### UTILITY TARGETS ###
+
+.PHONY: rebuild checkout all clean deploy
+
 rebuild: clean checkout
 
 checkout: all
 	@rsync -au --human-readable $(ASSETS) $(DESTDIR)
 
 all: $(TARGETS) 
-
-src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
-	$(info *****)
-	pandoc $(ARGV) -M pagetitle="$($<.title)" -A src/include/gitlog_afterbody.html -H src/include/gitlog_header.html -o $@ $<
-	./postproc $@
-
-%.html: %.mkd $(TEMPLATE)
-	$(info -----)
-	pandoc $(ARGV) -M pagetitle="$($<.title)" -o $@ $<
-	./postproc $@
 
 clean:
 	rm -f src/*.html
@@ -60,4 +54,17 @@ clean:
 deploy: checkout
 	$(info deploy: not implemented)
 
-.PHONY: rebuild checkout all clean deploy
+### PAGE BUILD TARGETS ###
+
+%.html: %.mkd $(TEMPLATE)
+	$(info -----)
+	pandoc $(ARGV) -M pagetitle="$($<.title)" -o $@ $<
+	./postproc $@
+
+# For the gitlog page, include a header with CSS/JS links and a footer
+# to post-load the query JS code.
+src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
+	$(info *****)
+	pandoc $(ARGV) -M pagetitle="$($<.title)" -A src/include/gitlog_afterbody.html -H src/include/gitlog_header.html -o $@ $<
+	./postproc $@
+

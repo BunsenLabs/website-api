@@ -173,6 +173,14 @@ span.semibold {
   display:none;
 }
 
+.gha-feed a, .gha-feed a:visited {
+    color: #002b7f ! important;
+}
+
+.gha-feed {
+  background-color: rgba(203, 207, 211, 0.1) ! important;
+}
+
 /* ---- Tables ---- */
 
 /*  A clean textbook-like style with horizontal lines above and below and under 
@@ -262,5 +270,3 @@ caption /* This is for a table caption tag, not the p.caption Pandoc uses in a d
     margin-bottom: 0.3em; /* Good for when on top */
     padding-bottom: 0.2em;
     }
-
-
