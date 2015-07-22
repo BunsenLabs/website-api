@@ -30,6 +30,12 @@ ARGV=--email-obfuscation=javascript \
 		 --highlight-style monochrome \
 		 --include-before-body=$(NAVIGATION_HTML)
 
+# Pandoc variables set for all documents; expanded at build time!
+PANDOC_VARS = -M pagetitle="$($<.title)" 							\
+							-M filename="$(@F)" 										\
+							-M url-prefix="$(URL_PREFIX)" 					\
+							-M opengraph-image="$(OPENGRAPH_IMG)"
+
 # Checkout directory which will be uploaded
 DESTDIR=dst
 
@@ -63,20 +69,14 @@ deploy: checkout
 
 %.html: %.mkd $(TEMPLATE)
 	$(info -----)
-	pandoc $(ARGV) \
-		-M pagetitle="$($<.title)" \
-		-M filename="$(@F)" \
-		-M url-prefix="$(URL_PREFIX)" \
-		-M opengraph-image="$(OPENGRAPH_IMG)" \
-		-o $@ $<
+	pandoc $(ARGV) $(PANDOC_VARS) -o $@ $<
 	./postproc $@
 
 # For the gitlog page, include a header with CSS/JS links and a footer
 # to post-load the query JS code.
 src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
 	$(info *****)
-	pandoc $(ARGV) \
-		-M pagetitle="$($<.title)" \
+	pandoc $(ARGV) $(PANDOC_VARS) \
 		-A src/include/gitlog_afterbody.html \
 		-H src/include/gitlog_header.html \
 		-o $@ $<

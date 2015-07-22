@@ -6,10 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
   <!-- OpenGraph -->
+$if(page-title)$
   <meta property="og:title" content="$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$" />
+$endif$
   <meta property="og:url" content="$url-prefix$/$filename$"/>
   <meta property="og:type" content="website" />
+$if(opengraph-image)$
   <meta property="og:image" content="$url-prefix$/$opengraph-image$" />
+$endif$
 
   <!-- Google -->
   <meta name="google" content="notranslate">
