@@ -12,7 +12,7 @@ TEMPLATE=templates/default.html5
 TARGETS=$(patsubst %.mkd,%.html,$(wildcard src/*.mkd))
 
 # Files to deploy
-ASSETS=$(TARGETS) src/js src/img src/css 
+ASSETS=$(TARGETS) src/js src/img src/css src/robots.txt
 
 # Main navigation and page header
 NAVIGATION_HTML=src/include/navigation.html
@@ -32,6 +32,11 @@ ARGV=--email-obfuscation=javascript \
 
 # Checkout directory which will be uploaded
 DESTDIR=dst
+
+# Page root
+URL_PREFIX=https://fserve.2ion.eu/bunsen0
+
+OPENGRAPH_IMG=img/opengraph-flame.png
 
 # Provides page titles
 include config/pagetitles.mk
@@ -58,13 +63,22 @@ deploy: checkout
 
 %.html: %.mkd $(TEMPLATE)
 	$(info -----)
-	pandoc $(ARGV) -M pagetitle="$($<.title)" -o $@ $<
+	pandoc $(ARGV) \
+		-M pagetitle="$($<.title)" \
+		-M filename="$(@F)" \
+		-M url-prefix="$(URL_PREFIX)" \
+		-M opengraph-image="$(OPENGRAPH_IMG)" \
+		-o $@ $<
 	./postproc $@
 
 # For the gitlog page, include a header with CSS/JS links and a footer
 # to post-load the query JS code.
 src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
 	$(info *****)
-	pandoc $(ARGV) -M pagetitle="$($<.title)" -A src/include/gitlog_afterbody.html -H src/include/gitlog_header.html -o $@ $<
+	pandoc $(ARGV) \
+		-M pagetitle="$($<.title)" \
+		-A src/include/gitlog_afterbody.html \
+		-H src/include/gitlog_header.html \
+		-o $@ $<
 	./postproc $@
 

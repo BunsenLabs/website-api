@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html$if(lang)$ lang="$lang$"$endif$>
-<head>
+<head prefix="og: http://ogp.me/ns#">
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$" />
+  <meta property="og:url" content="$url-prefix$/$filename$"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="$url-prefix$/$opengraph-image$" />
+
+  <!-- Google -->
   <meta name="google" content="notranslate">
-  <meta name="description" content="BunsenLabs Linux">
+
 $for(author-meta)$
   <meta name="author" content="$author-meta$">
 $endfor$
