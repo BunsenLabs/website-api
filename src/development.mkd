@@ -1,0 +1,22 @@
+BunsenLabs is being developed [on Github](https://github.com/BunsenLabs)
+where we make all our code and packages available, along with its
+history.
+
+If you have a bug to report, you may do so either [on the
+forums](http://crunchbang.org/forums) or, in the ideal case, to the right
+package's issue tracker. The list of currently maintained packages is as
+follows:
+
+| Package           | VCS Browser                                             | Issue Tracker                                                     | 
+|:------------------|:-------------------------------------------------------:|:-----------------------------------------------------------------:|
+|bunsen-common      | [VCS](https://github.com/bunsenlabs/bunsen-common)      | [Tracker](https://github.com/BunsenLabs/bunsen-common/issues)     |
+|bunsen-configs     | [VCS](https://github.com/bunsenlabs/bunsen-configs)     | [Tracker](https://github.com/BunsenLabs/bunsen-configs/issues)    |
+|bunsen-conky       | [VCS](https://github.com/bunsenlabs/bunsen-conky)       | [Tracker](https://github.com/BunsenLabs/bunsen-conky/issues)      |
+|bunsen-docs        | [VCS](https://github.com/bunsenlabs/bunsen-docs)        | [Tracker](https://github.com/BunsenLabs/bunsen-docs/issues)       |
+|bunsen-images      | [VCS](https://github.com/bunsenlabs/bunsen-images)      | [Tracker](https://github.com/BunsenLabs/bunsen-images/issues)     |
+|bunsen-os-release  | [VCS](https://github.com/bunsenlabs/bunsen-os-release)  | [Tracker](https://github.com/BunsenLabs/bunsen-os-release/issues) |
+|bunsen-pipemenus   | [VCS](https://github.com/bunsenlabs/bunsen-pipemenus)   | [Tracker](https://github.com/BunsenLabs/bunsen-pipemenus/issues)  |
+|bunsen-utilities   | [VCS](https://github.com/bunsenlabs/bunsen-utilities)   | [Tracker](https://github.com/BunsenLabs/bunsen-utilities/issues)  |
+|bunsen-welcome     | [VCS](https://github.com/bunsenlabs/bunsen-welcome)     | [Tracker](https://github.com/BunsenLabs/bunsen-welcome/issues)    |
+
+Click [here](gitlog.html) in order to see an overview over recent development activity.

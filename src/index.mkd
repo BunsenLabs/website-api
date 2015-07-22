@@ -1,9 +1,7 @@
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+BunsenLabs GNU/Linux is a light-weight distribution offering a lean but
+tweakable [Openbox](http://openbox.org/wiki/Main_Page) desktop. The
+current release **Hydrogen** is based on the last stable
+[Debian](https://www.debian.org) release, Jessie. The project is the
+[community
+continuation](http://crunchbang.org/forums/viewtopic.php?id=39049) of
+\#! CrunchBang Linux.

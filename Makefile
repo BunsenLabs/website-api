@@ -15,7 +15,7 @@ TARGETS=$(patsubst %.mkd,%.html,$(wildcard src/*.mkd))
 ASSETS=$(TARGETS) src/js src/img src/css 
 
 # Main navigation and page header
-NAVIGATION_HTML=src/global/navigation.html
+NAVIGATION_HTML=src/include/navigation.html
 
 # CSS include path, relative to pageroot
 STYLE=css/plain.css
@@ -42,6 +42,11 @@ checkout: all
 	@rsync -au --human-readable $(ASSETS) $(DESTDIR)
 
 all: $(TARGETS) 
+
+src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
+	$(info *****)
+	pandoc $(ARGV) -M pagetitle="$($<.title)" -A src/include/gitlog_afterbody.html -H src/include/gitlog_header.html -o $@ $<
+	./postproc $@
 
 %.html: %.mkd $(TEMPLATE)
 	$(info -----)
