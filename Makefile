@@ -31,10 +31,10 @@ ARGV=--email-obfuscation=javascript \
 		 --include-before-body=$(NAVIGATION_HTML)
 
 # Pandoc variables set for all documents; expanded at build time!
-PANDOC_VARS = -M pagetitle="$($<.title)" 							\
-							-M filename="$(@F)" 										\
-							-M url-prefix="$(URL_PREFIX)" 					\
-							-M opengraph-image="$(OPENGRAPH_IMG)"
+PANDOC_VARS=-M pagetitle="$($<.title)" \
+						-M filename="$(@F)" \
+						-M url-prefix="$(URL_PREFIX)" \
+						-M opengraph-image="$(OPENGRAPH_IMG)"
 
 # Checkout directory which will be uploaded
 DESTDIR=dst
@@ -63,7 +63,7 @@ clean:
 	rm -fr dst/*
 
 deploy: checkout
-	$(info deploy: not implemented)
+	rsync -au --progress --human-readable --delete --chmod=D0755,F0644 dst/ bunsen@bunsenpkg:/srv/www.bunsenlabs.org/
 
 ### PAGE BUILD TARGETS ###
 
@@ -81,4 +81,3 @@ src/gitlog.html: src/gitlog.mkd $(TEMPLATE)
 		-H src/include/gitlog_header.html \
 		-o $@ $<
 	./postproc $@
-

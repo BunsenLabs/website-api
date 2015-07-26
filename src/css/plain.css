@@ -33,17 +33,26 @@ html {
   body {
     width: 750px;
   }
+  img.logo {
+    height: 120px;
+  }
 }
 
 @media all and (max-width: 799px) {
   body {
     width: 90%;
   }
+  img.logo {
+    width: 85%;
+  }
 }
 
 @media all and (max-width: 799px) and (orientation: landscape) {
   body {
     width: 75%;
+  }
+  img.logo {
+    width: 65%;
   }
 }
 
@@ -238,7 +247,18 @@ td, th /* Table cells and table header cells */
     padding-top:    0.2em;
     padding-bottom: 0.2em;
     }
-    
+
+table.plain {
+  border: none;
+  margin: auto;
+  width: 100%;
+}
+
+table.plain tbody tr td {
+  vertical-align: center!important;
+}
+
+
 /* Removes padding on left and right of table for a tight look. Good if thead has no background color*/
 /*
 tr td:last-child, tr th:last-child
