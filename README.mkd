@@ -1,0 +1,85 @@
+This repository holds everything what makes up the BunsenLabs main website.
+
+The site is static and uses the pandoc markup-language converter and a few
+simple post-processing scripts to build the individual pages from Markdown
+sources. The build system is a simple Makefile. The site is deployed via a
+single `rsync` invocation. The page does support syntax highlighting.
+
+View the [Pandoc user guide](http://pandoc.org/README.html) for details on
+Pandoc's markdown dialect.
+
+## Toolchain
+
+* GNU make
+* pandoc
+* bash
+* sed
+
+## Build commands
+
+* `make deploy`: rebuild, checkout and deploy the page to the server. You need
+  to have the right SSH public key for authentication :)
+* `make rebuild`: clean and checkout
+* `make checkout`: build all HTML pages and copy all assets into `/dst`
+* `make all`: build all HTML pages
+* `make clean`: remove all HTML files in `/src`, and all contents below `/dst`
+
+## Page structure
+
+```
+.
+├── config
+│   └── pagetitles.mk                           The <title> for individual HTML pages are defined here  
+├── dst                                         After `make checkout`, all files to be deployed will be placed here
+├── Makefile                                    
+├── postproc                                    Invokes all post-processing scripts in /postproc.d. Scripts receive the path to each readily-built HTML file
+├── postproc.d
+│   ├── highlight_current_pages.sh              In the navigation header, boldens the current page's name if it's in the header
+│   └── remove_overflow-x_codestyle.sh          Removes an overflow-x CSS declaration from the code highlighting style
+├── README.mkd
+├── src
+│   ├── css
+│   │   ├── opensans.css                        Imports OpenSans from Google Fonts
+│   │   ├── plain.css                           Main style sheet
+│   │   └── ubuntumono.css                      Imports Ubuntu Mono from Google Fonts
+│   ├── development.mkd                         Topic: Sources, development, contributions
+│   ├── gitlog.mkd                              Shows recent commit activity to the BunsenLabs Github repos
+│   ├── img
+│   │   ├── bunsenlabs-text-flame.svg
+│   │   ├── favicon16.png
+│   │   ├── favicon32.png
+│   │   ├── favicon48.png
+│   │   ├── netcup-logo.png
+│   │   └── opengraph-flame.png
+│   ├── include
+│   │   ├── gitlog_afterbody.html               Directly included into gitlog.html: <script> tag
+│   │   ├── gitlog_header.html                  Directly included into gitlog.html: import github-activity js/css files
+│   │   └── navigation.html                     Global navigation header
+│   ├── index.mkd
+│   ├── js
+│   │   ├── github-activity-0.1.1.min.css
+│   │   ├── github-activity-0.1.1.min.js
+│   │   ├── html5shiv.min.js
+│   │   ├── mustache
+│   │   │   └── mustache.min.js
+│   │   └── octicons
+│   │       ├── octicons.eot
+│   │       ├── octicons.min.css
+│   │       ├── octicons.svg
+│   │       ├── octicons.ttf
+│   │       └── octicons.woff
+│   ├── live.mkd                                Topic: Live-ISOs
+│   ├── repository.mkd                          Topic: How to use the repository. Will be external at pkg.bunsenlabs.org
+│   └── robots.txt                              What we want to have indexed
+└── templates
+    └── default.html5                           Main template. Defines favicons, among other things
+```
+
+## OpenGraph support
+
+The page implements Facebook's [OpenGraph](http://ogp.me/) page tags so that it
+will show up a neat logo and page description when shared on Facebook, Google+,
+Twitter and other kinds of social media.
+
+This doesn't send requests to Facebook servers at all so it's not a privacy
+issue.

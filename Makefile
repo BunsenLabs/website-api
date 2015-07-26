@@ -62,7 +62,7 @@ clean:
 	rm -f src/*.html
 	rm -fr dst/*
 
-deploy: checkout
+deploy: rebuild
 	rsync -au --progress --human-readable --delete --chmod=D0755,F0644 dst/ bunsen@bunsenpkg:/srv/www.bunsenlabs.org/
 
 ### PAGE BUILD TARGETS ###
