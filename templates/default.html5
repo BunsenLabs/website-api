@@ -4,7 +4,12 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
+$for(author-meta)$
+  <meta name="author" content="$author-meta$">
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$">
+$endif$
   <!-- OpenGraph -->
 $if(page-title)$
   <meta property="og:title" content="$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$" />
@@ -14,16 +19,9 @@ $endif$
 $if(opengraph-image)$
   <meta property="og:image" content="$url-prefix$/$opengraph-image$" />
 $endif$
-
   <!-- Google -->
   <meta name="google" content="notranslate">
-
-$for(author-meta)$
-  <meta name="author" content="$author-meta$">
-$endfor$
-$if(date-meta)$
-  <meta name="dcterms.date" content="$date-meta$">
-$endif$
+  <!-- Favicon -->
   <link rel="icon" href="img/favicon16.png" sizes="16x16">
   <link rel="icon" href="img/favicon32.png" sizes="32x32">
   <link rel="icon" href="img/favicon48.png" sizes="48x48">
