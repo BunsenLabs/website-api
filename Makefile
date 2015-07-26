@@ -54,6 +54,7 @@ include config/pagetitles.mk
 rebuild: clean checkout
 
 checkout: all
+	mkdir -p $(DESTDIR)
 	@rsync -au --human-readable $(ASSETS) $(DESTDIR)
 
 all: $(TARGETS) 
