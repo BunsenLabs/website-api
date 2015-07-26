@@ -1,7 +1,27 @@
-BunsenLabs GNU/Linux is a light-weight distribution offering a lean but
-tweakable [Openbox](http://openbox.org/wiki/Main_Page) desktop. The
-current release **Hydrogen** is based on the last stable
-[Debian](https://www.debian.org) release, Jessie. The project is the
-[community
-continuation](http://crunchbang.org/forums/viewtopic.php?id=39049) of
-\#! CrunchBang Linux.
+[openbox]:    <http://openbox.org/wiki/Main_Page>
+[debian]:     <https://www.debian.org>  
+[bunsenintro]:<http://crunchbang.org/forums/viewtopic.php?id=39049>
+
+BunsenLabs Linux is a light-weight distribution offering a lean but
+tweakable Openbox desktop. The current release is **Hydrogen**,
+built on Debian Jessie.
+
+<div class="gallery items-3">
+<div id="item-1" class="control-operator"></div>
+<div id="item-2" class="control-operator"></div>
+<div id="item-3" class="control-operator"></div>
+<figure class="item"><img style="width:100%;" src="img/hydrogena2-0.png"></figure>
+<figure class="item"><img style="width:100%;" src="img/hydrogena2-1.png"></figure>
+<figure class="item"><img style="width:100%;" src="img/hydrogena2-2.png"></figure>
+<div class="controls">
+<a href="#item-1" class="control-button">•</a>
+<a href="#item-2" class="control-button">•</a>
+<a href="#item-3" class="control-button">•</a>
+</div>
+</div>
+
+The distribution consists of nine configuration and resource packages which
+can be added to any system running Debian Jessie -- alternatively, the
+OS may be pre-viewed or installed using a live ISO.
+
+## Features

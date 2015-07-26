@@ -73,6 +73,13 @@ deploy: rebuild
 	pandoc $(ARGV) $(PANDOC_VARS) -o $@ $<
 	./postproc $@
 
+src/index.html: src/index.mkd $(TEMPLATE)
+	$(info ****)
+	pandoc $(ARGV) $(PANDOC_VARS) \
+		-H src/include/index_header.html \
+		-o $@ $<
+	./postproc $@
+
 # For the gitlog page, include a header with CSS/JS links and a footer
 # to post-load the query JS code.
 src/gitlog.html: src/gitlog.mkd $(TEMPLATE)

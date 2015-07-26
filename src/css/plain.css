@@ -22,6 +22,7 @@ body {
 
 body > p {
   line-height: 1.50;
+  text-rendering: optimizeLegibility;
 }
 
 
