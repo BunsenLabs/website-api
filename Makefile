@@ -34,18 +34,20 @@ ARGV=--email-obfuscation=javascript \
 PANDOC_VARS=-M pagetitle="$($<.title)" \
 						-M filename="$(@F)" \
 						-M url-prefix="$(URL_PREFIX)" \
-						-M opengraph-image="$(OPENGRAPH_IMG)"
+						-M opengraph-image="$(OPENGRAPH_IMG)" \
+						-M opengraph-description="$($<.description)"
 
 # Checkout directory which will be uploaded
 DESTDIR=dst
 
 # Page root
-URL_PREFIX=https://fserve.2ion.eu/bunsen0
+URL_PREFIX=http://bunsen-www.2ion.eu
 
 OPENGRAPH_IMG=img/opengraph-flame.png
 
-# Provides page titles
+# Per-page pagetitles and descriptions
 include config/pagetitles.mk
+include config/pagedescriptions.mk
 
 ### UTILITY TARGETS ###
 
