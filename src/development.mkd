@@ -21,3 +21,15 @@ follows:
 |bunsen-welcome           | [VCS](https://github.com/bunsenlabs/bunsen-welcome)           | [Tracker](https://github.com/BunsenLabs/bunsen-welcome/issues)          |
 
 Click [here](gitlog.html) in order to see an overview over recent development activity.
+
+## Foreign packages
+
+We are shipping the following packages (or builds) in our repository the
+development of which is not being done by the BunsenLabs team. Please
+file functionality-related bug reports at the project's respective issue
+trackers.
+
+| Package                 | Homepage                                                      |
+|:------------------------|:-------------------------------------------------------------:|
+|mpv-bash-completion      |[Link](https://github.com/2ion/mpv-bash-completion)|
+|ttf-ubuntu-font-family   |[Link](http://packages.ubuntu.com/source/vivid/ubuntu-font-family-sources)|
