@@ -10,6 +10,9 @@ $endfor$
 $if(date-meta)$
   <meta name="dcterms.date" content="$date-meta$">
 $endif$
+$if(opengraph-description)$
+  <meta name="description" content="$opengraph-description$" />
+$endif$
   <!-- OpenGraph -->
   <meta property="og:url" content="$url-prefix$/$filename$"/>
   <meta property="og:type" content="website" />
