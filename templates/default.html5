@@ -11,7 +11,7 @@ $if(date-meta)$
   <meta name="dcterms.date" content="$date-meta$">
 $endif$
   <!-- OpenGraph -->
-$if(page-title)$
+$if(pagetitle)$
   <meta property="og:title" content="$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$" />
 $endif$
   <meta property="og:url" content="$url-prefix$/$filename$"/>
