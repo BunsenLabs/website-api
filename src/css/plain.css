@@ -1,3 +1,12 @@
+/*
+ * plain.css - BunsenLabs main stylesheet
+ * Copyright (C) 2015 The BunsenLabs Team
+ *
+ * Parts of it and the overall look are based on or copied from the
+ * 'Buttondown' pandoc stylesheet by Ryan Gray. Link to the original
+ * file: https://gist.github.com/ryangray/1882525
+ */
+
 @import url("opensans.css");
 @import url("ubuntumono.css");
 
