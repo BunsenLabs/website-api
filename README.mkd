@@ -1,12 +1,16 @@
-This repository holds everything what makes up the BunsenLabs main website.
+This repository holds everything what makes up the BunsenLabs main
+website. Because the Makefile (and other files) contain information on
+the server or other internal infrastructure, it shall never be
+published.
 
-The site is static and uses the pandoc markup-language converter and a few
-simple post-processing scripts to build the individual pages from Markdown
-sources. The build system is a simple Makefile. The site is deployed via a
-single `rsync` invocation. The page does support syntax highlighting.
+The site is static and uses the pandoc markup-language converter and a
+few simple post-processing scripts to build the individual pages from
+Markdown sources. The build system is a simple Makefile. The site is
+deployed via a single `rsync` invocation. The page does support syntax
+highlighting.
 
-View the [Pandoc user guide](http://pandoc.org/README.html) for details on
-Pandoc's markdown dialect.
+View the [Pandoc user guide](http://pandoc.org/README.html) for details
+on Pandoc's markdown dialect.
 
 ## Toolchain
 
@@ -17,12 +21,13 @@ Pandoc's markdown dialect.
 
 ## Build commands
 
-* `make deploy`: rebuild, checkout and deploy the page to the server. You need
-  to have the right SSH public key for authentication :)
+* `make deploy`: rebuild, checkout and deploy the page to the server.
+  You need to have the right SSH public key for authentication :)
 * `make rebuild`: clean and checkout
 * `make checkout`: build all HTML pages and copy all assets into `/dst`
 * `make all`: build all HTML pages
-* `make clean`: remove all HTML files in `/src`, and all contents below `/dst`
+* `make clean`: remove all HTML files in `/src`, and all contents below
+  `/dst`
 
 ## Page structure
 
@@ -32,7 +37,7 @@ Pandoc's markdown dialect.
 │   ├── pagedescriptions.mk                     Per-page descriptions going into the og:description and meta:description tags if defined
 │   └── pagetitles.mk                           Per-page HTML page titles
 ├── dst                                         After `make checkout`, all files to be deployed will be placed here
-├── Makefile                                    
+├── Makefile
 ├── postproc                                    Invokes all post-processing scripts in /postproc.d. Scripts receive the path to each readily-built HTML file
 ├── postproc.d
 │   ├── highlight_current_pages.sh              In the navigation header, boldens the current page's name if it's in the header
@@ -78,9 +83,9 @@ Pandoc's markdown dialect.
 
 ## OpenGraph support
 
-The page implements Facebook's [OpenGraph](http://ogp.me/) page tags so that it
-will show up a neat logo and page description when shared on Facebook, Google+,
-Twitter and other kinds of social media.
+The page implements Facebook's [OpenGraph](http://ogp.me/) page tags so
+that it will show up a neat logo and page description when shared on
+Facebook, Google+, Twitter and other kinds of social media.
 
-This doesn't send requests to Facebook servers at all so it's not a privacy
-issue.
+This doesn't send requests to Facebook servers at all so it's not a
+privacy issue.
