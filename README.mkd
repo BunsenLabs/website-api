@@ -29,7 +29,8 @@ Pandoc's markdown dialect.
 ```
 .
 ├── config
-│   └── pagetitles.mk                           The <title> for individual HTML pages are defined here  
+│   ├── pagedescriptions.mk                     Per-page descriptions going into the og:description and meta:description tags if defined
+│   └── pagetitles.mk                           Per-page HTML page titles
 ├── dst                                         After `make checkout`, all files to be deployed will be placed here
 ├── Makefile                                    
 ├── postproc                                    Invokes all post-processing scripts in /postproc.d. Scripts receive the path to each readily-built HTML file
