@@ -1,0 +1,55 @@
+[LinuxFAQ]: <https://www.debian.org/CD/faq/#record-unix>
+[WindowsFAQ]: <https://www.debian.org/CD/faq/#record-windows>
+[OSXFAQ]: <https://www.debian.org/CD/faq/#record-mac>
+[USBFAQ]: <https://www.debian.org/CD/faq/#write-usb>
+
+[TorrentFile64]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-amd64.hybrid.iso>
+[TorrentFile32]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-i586_i686pae.hybrid.iso>
+[TorrentMagnet64]: <>
+[TorrentMagnet32]: <>
+[DDL64]: <http://ddl.bunsenlabs.org/64.iso>
+[DDL32]: <http://ddl.bunsenlabs.org/32.iso>
+[shasums64]: <>
+[shasums32]: <>
+
+There are two ways to install all or part of BunsenLabs Linux:
+
+1. Install the system from a live CD, DVD or USB key;
+2. Include the repository into your existing Debian system and
+   selectively BunsenLabs packages.
+
+## Live CD/DVD/USB key
+
+This is the preferred and officially supported installation method. You
+first download a so-called hybrid ISO image which, depending on size, is
+suitable for writing to a CD/DVD medium or an USB key drive. Then, after
+booting from the installation medium, you have the chance to test the
+Bunsen desktop and install the system to your computer.
+
+After downloading the ISO file from one of the sources below, you may
+find help with burning the file to disk or writing to an USB key in the
+Debian FAQ section:
+
+* How to write an ISO image under [Linux/Unix][LinuxFAQ],
+  [Windows][WindowsFAQ] or [Mac OS X][OSXFAQ]?
+* [How to write a CD/DVD/BD image to a USB flash drive][USBFAQ]?
+
+### Downloads
+
+If you can use BitTorrent, please do so as to keep load off our server.
+If possbile, please leave the client open for a while so you can seed
+the files for other users.
+
+Otherwise, use the direct download links. Do not forget to verify direct
+downloads using the checksum file provided.
+
+| ISO file                          | Size                | .torrent file              | .torrent magent link     | DDL            | sha256           |
+|:----------------------------------|:-------------------:|:-------------------------:|:-----------------------:|:-------------------:|:-------------------:|
+| bl-hydrogen-rc1-amd64.hybrid.iso  | 600M               | [✱][TorrentFile64] | [✱][TorrentMagnet64] | [✱][DDL64] | [✱][shasums64]|
+| bl-hydrogen-rc1-i586+i686.hybrid.iso[^1] | 700M            | [✱][TorrentFile32] | [✱][TorrentMagnet32] | [✱][DDL32] | [✱][shasums32]|
+
+[^1]: The 32bit ISO image contains two x86 kernels: An
+[i586](https://en.wikipedia.org/wiki/P5_%28microarchitecture%29) kernel without
+PAE and an [i686](https://en.wikipedia.org/wiki/P6_%28microarchitecture%29)
+PAE-enabled kernel.
+
