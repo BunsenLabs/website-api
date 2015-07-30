@@ -17,7 +17,7 @@ There are two ways to install all or part of BunsenLabs Linux:
 
 1. [Install the system from a live CD, DVD or USB key](#live-cddvdusb-key-method)
 2. [Include the repository](#repository-method) into your existing Debian system and
-   selectively BunsenLabs packages.
+   selectively install BunsenLabs packages.
 
 ## System requirements
 
@@ -38,7 +38,7 @@ fine with less resources.
 
 This is the preferred and officially supported installation method. You
 first download a so-called hybrid ISO image which, depending on size, is
-suitable for writing to a CD/DVD medium or an USB key drive. Then, after
+suitable for writing to a CD/DVD medium or a USB key drive. Then, after
 booting from the installation medium, you have the chance to test the
 Bunsen desktop and install the system to your computer.
 
@@ -53,8 +53,8 @@ Debian FAQ section:
 ### Downloads
 
 If you can use BitTorrent, please do so as to keep load off our server.
-If possbile, please leave the client open for a while so you can seed
-the files for other users.
+If possible, please leave the client open for a while so you can seed the
+files for other users.
 
 Otherwise, use the direct download links. Do not forget to verify direct
 downloads using the checksum file provided.
