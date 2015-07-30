@@ -43,7 +43,7 @@ booting from the installation medium, you have the chance to test the
 Bunsen desktop and install the system to your computer.
 
 After downloading the ISO file from one of the sources below, you may
-find help with burning the file to disk or writing to an USB key in the
+find help with burning the file to disk or writing to a USB key in the
 Debian FAQ section:
 
 * How to write an ISO image under [Linux/Unix][LinuxFAQ],
@@ -59,10 +59,10 @@ files for other users.
 Otherwise, use the direct download links. Do not forget to verify direct
 downloads using the checksum file provided[^2]:
 
-| ISO file                          | Size                | .torrent file              | .torrent magent link     | DDL            | sha256           |
-|:----------------------------------|:-------------------:|:-------------------------:|:-----------------------:|:-------------------:|:-------------------:|
-| bl-hydrogen-rc1-amd64.hybrid.iso  | 600M               | [✱][TorrentFile64] | [✱][TorrentMagnet64] | [✱][DDL64] | [✱][shasums64]|
-| bl-hydrogen-rc1-i586+i686.hybrid.iso[^1] | 700M            | [✱][TorrentFile32] | [✱][TorrentMagnet32] | [✱][DDL32] | [✱][shasums32]|
+| ISO file                                  | Size                | .torrent file              | .torrent magnet link     | DDL            | sha256           |
+|:------------------------------------------|:-------------------:|:--------------------------:|:------------------------:|:--------------:|:----------------:|
+| bl-hydrogen-rc1-amd64.hybrid.iso          | 600M                | [✱][TorrentFile64]         | [✱][TorrentMagnet64]     | [✱][DDL64]     | [✱][shasums64]   |
+| bl-hydrogen-rc1-i586+i686.hybrid.iso[^1]  | 700M                | [✱][TorrentFile32]         | [✱][TorrentMagnet32]     | [✱][DDL32]     | [✱][shasums32]   |
 
 [^1]: The 32bit ISO image contains two x86 kernels: An
 [i586](https://en.wikipedia.org/wiki/P5_%28microarchitecture%29) kernel without
