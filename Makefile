@@ -24,7 +24,7 @@ STYLE=css/plain.css
 ARGV=--email-obfuscation=javascript \
 		 --smart \
 		 --template=$(TEMPLATE) \
-		 -f markdown+footnotes+fenced_code_attributes \
+		 -f markdown+footnotes+fenced_code_attributes+auto_identifiers \
 		 -s \
 		 -c $(STYLE) \
 		 --highlight-style monochrome \

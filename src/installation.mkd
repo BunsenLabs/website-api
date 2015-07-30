@@ -11,14 +11,30 @@
 [DDL32]: <http://ddl.bunsenlabs.org/32.iso>
 [shasums64]: <>
 [shasums32]: <>
+[HardwareRequirements]: <https://www.debian.org/releases/jessie/amd64/ch03s04.html.en>
 
 There are two ways to install all or part of BunsenLabs Linux:
 
-1. Install the system from a live CD, DVD or USB key;
-2. Include the repository into your existing Debian system and
+1. [Install the system from a live CD, DVD or USB key](#live-cddvdusb-key-method)
+2. [Include the repository](#repository-method) into your existing Debian system and
    selectively BunsenLabs packages.
 
-## Live CD/DVD/USB key
+## System requirements
+
+BunsenLabs is a Debian Jessie desktop with custom configurations and
+some additions. Hence, the [hardware
+recommendations][HardwareRequirements] from the Debian project apply for
+both 32bit and 64bit systems:
+
+|RAM (minimum)|RAM (recommended)|Hard Drive|
+|:-----------:|:---------------:|:--------:|
+|256M|1G|10G|
+
+Depending on the applications and feature set you decide to use
+(especially if you do not run a graphical desktop), the system may run
+fine with less resources.
+
+## Live CD/DVD/USB key method
 
 This is the preferred and officially supported installation method. You
 first download a so-called hybrid ISO image which, depending on size, is
@@ -52,4 +68,18 @@ downloads using the checksum file provided.
 [i586](https://en.wikipedia.org/wiki/P5_%28microarchitecture%29) kernel without
 PAE and an [i686](https://en.wikipedia.org/wiki/P6_%28microarchitecture%29)
 PAE-enabled kernel.
+
+## Repository method
+
+You may also choose to follow our repository set-up
+[instructions](http://pkg.bunsenlabs.org) and include our package
+repository into your existing system. This way, you can selectively
+install [packages from the BunsenLabs project](development.html) and use
+only a subset of our configurations and assets.
+
+The packages are built and made to be installed on Debian Jessie
+systems. However, depending on the package, it may be possible to
+install on the Debian old-stable release
+[Wheezy](https://wiki.debian.org/DebianWheezy) and current
+[Ubuntu](http://releases.ubuntu.com/) releases.
 

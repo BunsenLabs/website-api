@@ -27,6 +27,7 @@ body {
     margin: auto;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
+    margin-bottom: 2ex;
 }
 
 body > p {
