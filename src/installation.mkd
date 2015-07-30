@@ -57,7 +57,7 @@ If possible, please leave the client open for a while so you can seed the
 files for other users.
 
 Otherwise, use the direct download links. Do not forget to verify direct
-downloads using the checksum file provided.
+downloads using the checksum file provided[^2]:
 
 | ISO file                          | Size                | .torrent file              | .torrent magent link     | DDL            | sha256           |
 |:----------------------------------|:-------------------:|:-------------------------:|:-----------------------:|:-------------------:|:-------------------:|
@@ -68,6 +68,10 @@ downloads using the checksum file provided.
 [i586](https://en.wikipedia.org/wiki/P5_%28microarchitecture%29) kernel without
 PAE and an [i686](https://en.wikipedia.org/wiki/P6_%28microarchitecture%29)
 PAE-enabled kernel.
+
+[^2]: Place the file containing the checksums in the same directory as
+your ISO file downloads, and then run in a terminal `sha256sum --check
+$CHECKSUM-FILE`.
 
 ## Repository method
 
