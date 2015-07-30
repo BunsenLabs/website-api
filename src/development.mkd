@@ -2,6 +2,8 @@ BunsenLabs is being developed [on Github](https://github.com/BunsenLabs)
 where we make all our code and packages available, along with its
 history.
 
+## Packages and bug reports
+
 If you have a bug to report, you may do so either [on the
 forums](http://crunchbang.org/forums) or, in the ideal case, to the right
 package's issue tracker. The list of currently maintained packages is as
@@ -33,3 +35,19 @@ trackers.
 |:------------------------|:-------------------------------------------------------------:|
 |mpv-bash-completion      |[Link](https://github.com/2ion/mpv-bash-completion)|
 |ttf-ubuntu-font-family   |[Link](http://packages.ubuntu.com/source/vivid/ubuntu-font-family-sources)|
+
+## Developers
+
+The core development team does currently compromise the following
+people (alphabetically sorted):
+
+| Handle                           | Github profile                             | #! forums profile                                               |
+|:---------------------------------|:-------------------------------------------|:----------------------------------------------------------------|
+| Sector11                         | [Sector11](https://github.com/Sector11)    | [Sector11](http://crunchbang.org/forums/profile.php?id=5745)    |
+| Unia                             | [Unia](https://github.com/Unia)            | [Unia](http://crunchbang.org/forums/profile.php?id=6505)        |
+| damo                             | [capn-damo](https://github.com/capn-damo)  | [damo](http://crunchbang.org/forums/profile.php?id=12994)       |
+| hhh                              | [hhhorb](https://github.com/hhhorb)        | [hhh](http://crunchbang.org/forums/profile.php?id=6659)         |
+| johnraff                         | [johnraff](https://github.com/johnraff)    | [johnraff](http://crunchbanglinux.org/forums/profile.php?id=353)|
+| lcafiero                         | [lcafiero](https://github.com/lcafiero)    | [lcafiero](http://crunchbang.org/forums/profile.php?id=11295)   |
+| pvsage                           | [pvsage](https://github.com/pvsage)        | [pvsage](http://crunchbang.org/forums/profile.php?id=3596)      |
+| twoion                           | [2ion](https://github.com/2ion)            | [twoion](http://crunchbang.org/forums/profile.php?id=16384)     |
