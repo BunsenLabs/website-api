@@ -128,11 +128,11 @@ a /* All links */
     {
     /* Keep links clean. On screen, they are colored; in print, they do nothing anyway. */
     text-decoration: none;
-    color: #002b7f;
+    color: #222d77;
     }
 a:visited
     {
-    color: #002b7f;
+    color: #222d77;
     }
 @media screen
     {

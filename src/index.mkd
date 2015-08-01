@@ -1,10 +1,12 @@
 [openbox]:    <http://openbox.org/wiki/Main_Page>
 [debian]:     <https://www.debian.org>  
 [bunsenintro]:<http://crunchbang.org/forums/viewtopic.php?id=39049>
+[cb]:         <http://crunchbang.org/>
 
 BunsenLabs Linux is a light-weight distribution offering a lean but
-tweakable Openbox desktop. The current release is **Hydrogen**,
-built on Debian Jessie.
+tweakable Openbox desktop. The current release is **Hydrogen**, built on
+Debian Jessie. The project is the community continuation of [CrunchBang
+#! Linux][cb].
 
 <div class="gallery items-3">
 <div id="item-1" class="control-operator"></div>
@@ -20,8 +22,17 @@ built on Debian Jessie.
 </div>
 </div>
 
-The distribution consists of nine configuration and resource packages which
-can be added to any system running Debian Jessie -- alternatively, the
-OS may be pre-viewed or installed using a live ISO.
+The distribution consists of configuration and resource packages to be
+installed on top of Debian. While the preferred way to install the
+system is via a live ISO, the packages can be added on top of an
+existing Debian installation.
 
-## Features
+## Defining features
+
+* Pre-configured [Openbox](http://openbox.org/wiki/Main_Page)-based
+  desktop with a [tint2](https://gitlab.com/o9000/tint2) panel and
+  [conky](http://conky.sourceforge.net/) system monitor
+* Assortment of harmonising GTK2/3 themes, wallpapers and conky
+  configurations
+* Desktop-oriented configuration and helper utilities
+

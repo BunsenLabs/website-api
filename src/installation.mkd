@@ -1,17 +1,16 @@
-[LinuxFAQ]: <https://www.debian.org/CD/faq/#record-unix>
-[WindowsFAQ]: <https://www.debian.org/CD/faq/#record-windows>
-[OSXFAQ]: <https://www.debian.org/CD/faq/#record-mac>
-[USBFAQ]: <https://www.debian.org/CD/faq/#write-usb>
-
-[TorrentFile64]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-amd64.hybrid.iso>
-[TorrentFile32]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-i586_i686pae.hybrid.iso>
-[TorrentMagnet64]: <>
-[TorrentMagnet32]: <>
-[DDL64]: <http://ddl.bunsenlabs.org/64.iso>
 [DDL32]: <http://ddl.bunsenlabs.org/32.iso>
-[shasums64]: <>
-[shasums32]: <>
+[DDL64]: <http://ddl.bunsenlabs.org/64.iso>
 [HardwareRequirements]: <https://www.debian.org/releases/jessie/amd64/ch03s04.html.en>
+[LinuxFAQ]: <https://www.debian.org/CD/faq/#record-unix>
+[OSXFAQ]: <https://www.debian.org/CD/faq/#record-mac>
+[TorrentFile32]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-i586_i686pae.hybrid.iso>
+[TorrentFile64]: <http://tracker.bunsenlabs.org/torrents/bl-hydrogen-rc1-amd64.hybrid.iso>
+[TorrentMagnet32]: <>
+[TorrentMagnet64]: <>
+[USBFAQ]: <https://www.debian.org/CD/faq/#write-usb>
+[WindowsFAQ]: <https://www.debian.org/CD/faq/#record-windows>
+[shasums32]: <>
+[shasums64]: <>
 
 There are two ways to install all or part of BunsenLabs Linux:
 
@@ -26,9 +25,9 @@ some additions. Hence, the [hardware
 recommendations][HardwareRequirements] from the Debian project apply for
 both 32bit and 64bit systems:
 
-|RAM (minimum)|RAM (recommended)|Hard Drive|
-|:-----------:|:---------------:|:--------:|
-|256M|1G|10G|
+|RAM (minimum)|RAM (recommended)|Hard Drive |
+|:-----------:|:---------------:|:---------:|
+| 256M        | 1G              | 10G       |
 
 Depending on the applications and feature set you decide to use
 (especially if you do not run a graphical desktop), the system may run
