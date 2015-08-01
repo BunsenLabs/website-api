@@ -10,6 +10,10 @@
 @import url("opensans.css");
 @import url("ubuntumono.css");
 
+div.icons p img {
+  width:48px;
+}
+
 .center {
   text-align: center;
 }

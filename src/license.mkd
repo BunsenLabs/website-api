@@ -1,0 +1,10 @@
+All content on this page, if not otherwise noted, is Copyright © 2015
+The BunsenLabs Linux Project and licensed under a [Create Commons
+Attribution-NonCommercial-ShareAlike 4.0 International
+License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+<div class="center icons">
+![](img/cc-icons-svg/cc.svg)![](img/cc-icons-svg/by.svg)![](img/cc-icons-svg/nc.svg)![](img/cc-icons-svg/sa.svg)
+</div>
+
+The BunsenLabs logo was created by user [utoto](http://crunchbang.org/forums/profile.php?id=15094).

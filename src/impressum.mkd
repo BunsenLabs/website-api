@@ -1,0 +1,23 @@
+*This site is hosted in Germany. The following information is mandated
+by [§55 RStV](http://revosax.sachsen.de/vorschrift/1236-Rundfunkstaatsvertrag).*
+
+## Imprint
+
+BunsenLabs-Linux-Projekt<br>
+z.H. J. John<br>
+Aristotelessteig 6<br>
+10318 Berlin<br>
+
+Webmaster contact: [dev@2ion.de](mailto:dev@2ion.de)
+
+## Rechtliche Hinweise
+
+Die Inhalte unserer Webseiten haben wir sorgfältig zusammen gestellt.
+Sollten sich dennoch fehlerhafte oder veraltete Daten eingeschlichen
+haben, können wir dafür keine Haftung und Garantie übernehmen.
+
+Diese Website enthält Links zu anderen Websites. Wir haben keinerlei
+Kontrollmöglichkeit über diese Websites und übernehmen daher keine
+Verantwortung für den Inhalt der Websites Dritter. Wir behalten uns das
+Recht vor, die auf dieser Website enthaltenen Informationen jederzeit zu
+verändern oder zu aktualisieren. 

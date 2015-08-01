@@ -1,5 +1,5 @@
 [openbox]:    <http://openbox.org/wiki/Main_Page>
-[debian]:     <https://www.debian.org>  
+[debian]:     <https://www.debian.org> 
 [bunsenintro]:<http://crunchbang.org/forums/viewtopic.php?id=39049>
 [cb]:         <http://crunchbang.org/>
 
@@ -36,3 +36,8 @@ existing Debian installation.
   configurations
 * Desktop-oriented configuration and helper utilities
 
+<hr>
+
+<div class="center">
+Copyright © 2015 The BunsenLabs Linux Project | [Content License](license.html) | [Imprint](impressum.html)
+</div>
