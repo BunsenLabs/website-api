@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from bottle import run, route, abort
+from bottle import run, route
 import threading
 import time
 import requests
