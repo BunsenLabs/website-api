@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# opentracker stats proxy - provides torrent stats in JSON format
+
 from bottle import run, route
 import threading
 import time
