@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-# opentracker stats proxy - provides torrent stats in JSON format
-
-from bottle import run, route
+from bottle import run, route, abort
 import threading
 import time
 import requests
@@ -10,7 +8,7 @@ import requests
 PUBLIC = {}
 
 class Fetcher(threading.Thread):
-
+    
     def run(self):
         self.evt = threading.Event()
         self.update_data()
@@ -48,6 +46,6 @@ def torrent_status():
     return PUBLIC
 
 if __name__ == "__main__":
-    fetcher = Fetcher()
-    fetcher.start()
-    run(host="localhost", port=10101)
+  fetcher = Fetcher()
+  fetcher.start()
+  run(host="localhost", port=10101, server="cherrypy")
