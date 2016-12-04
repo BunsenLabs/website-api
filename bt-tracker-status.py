@@ -46,6 +46,6 @@ def torrent_status():
     return PUBLIC
 
 if __name__ == "__main__":
-  fetcher = Fetcher()
-  fetcher.start()
-  run(host="localhost", port=10101, server="cherrypy")
+    fetcher = Fetcher()
+    fetcher.start()
+    run(host="localhost", port=10101, server="cherrypy")
