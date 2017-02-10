@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+from bottle import run, route, abort
+import threading
+import feedparser
+import sys
+import time
+
+PUBLIC = {}
+
+class Fetcher(threading.Thread):
+  def run(self):
+    self.event = threading.Event()
+    self.update_feed_data()
+    while not self.event.wait(timeout=900):
+      self.update_feed_data()
+
+  def update_feed_data(self):
+    feed = feedparser.parse("https://forums.bunsenlabs.org/extern.php?action=feed&fid=12&type=atom")
+    entries = list(map(lambda e: {
+      "link":   self.head(e['link'], '&'),
+      "date":   self.head(e['updated'], 'T'),
+      "title":  " ".join(e['title'].split())
+      }, feed.entries))
+    global PUBLIC
+    PUBLIC = { "entries": entries, "ts": int(time.time()) }
+
+  @staticmethod
+  def head(s, sep):
+    return s.split(sep)[0]
+
+
+@route('/feed/news')
+def index():
+  return PUBLIC
+
+if __name__ == "__main__":
+  fetcher = Fetcher()
+  fetcher.start()
+  run(host="localhost", port=10102, server="cherrypy")
