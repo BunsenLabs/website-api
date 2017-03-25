@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
-from bottle import run, route, abort
-import threading
+from bottle import run, route, abort, response
+from django.utils import feedgenerator
 import feedparser
 import sys
+import threading
 import time
+from datetime import datetime
 
 PUBLIC = {}
+PUBLIC_ATOM = ""
 
 class Fetcher(threading.Thread):
   def run(self):
@@ -17,13 +20,22 @@ class Fetcher(threading.Thread):
 
   def update_feed_data(self):
     feed = feedparser.parse("https://forums.bunsenlabs.org/extern.php?action=feed&fid=12&type=atom")
+    refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', 'https://forums.bunsenlabs.org/viewforum.php?id=12', "")
     entries = list(map(lambda e: {
-      "link":   self.head(e['link'], '&'),
-      "date":   self.head(e['updated'], 'T'),
-      "title":  " ".join(e['title'].split())
+      "link":       self.head(e['link'], '&'),
+      "date":       self.head(e['updated'], 'T'),
+      "updated":    e['updated'],
+      "title":      " ".join(e['title'].split())
       }, feed.entries))
+    # JSON API
     global PUBLIC
     PUBLIC = { "entries": entries, "ts": int(time.time()) }
+    # ATOM XML API
+    for e in entries:
+      refeed.add_item(e["title"], e["link"], "",
+          updateddate = datetime.strptime(e["updated"], "%Y-%m-%dT%H:%M:%SZ"))
+    global PUBLIC_ATOM
+    PUBLIC_ATOM = refeed.writeString("utf-8")
 
   @staticmethod
   def head(s, sep):
@@ -33,6 +45,11 @@ class Fetcher(threading.Thread):
 @route('/feed/news')
 def index():
   return PUBLIC
+
+@route('/feed/news/atom')
+def idex():
+  response.content_type = "application/atom+xml; charset=utf-8"
+  return PUBLIC_ATOM
 
 if __name__ == "__main__":
   fetcher = Fetcher()
