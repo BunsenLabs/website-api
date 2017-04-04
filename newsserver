@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 from bottle import run, route, abort, response
+from bs4 import BeautifulSoup
 from django.utils import feedgenerator
 import feedparser
 import sys
 import threading
 import time
+import requests
 from datetime import datetime
 
 PUBLIC = {}
@@ -18,6 +20,17 @@ class Fetcher(threading.Thread):
     while not self.event.wait(timeout=900):
       self.update_feed_data()
 
+  def retrieve_op_summary(self, topic_url):
+    text = ""
+    try:
+      body = requests.get(topic_url).text
+      soup = BeautifulSoup(body, "html.parser")
+      op = soup.find("div", { "class": "blockpost1" }).find("div", { "class":"postmsg"}).find("p")
+      text = op.prettify(formatter="html")
+    except BaseException as e:
+      print("ERROR:", e)
+    return text
+
   def update_feed_data(self):
     feed = feedparser.parse("https://forums.bunsenlabs.org/extern.php?action=feed&fid=12&type=atom")
     refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', 'https://forums.bunsenlabs.org/viewforum.php?id=12', "")
@@ -25,6 +38,7 @@ class Fetcher(threading.Thread):
       "link":       self.head(e['link'], '&'),
       "date":       self.head(e['updated'], 'T'),
       "updated":    e['updated'],
+      "op_summary": self.retrieve_op_summary(e['link']),
       "title":      " ".join(e['title'].split())
       }, feed.entries))
     # JSON API
