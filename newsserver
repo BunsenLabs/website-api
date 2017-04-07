@@ -46,7 +46,7 @@ class Fetcher(threading.Thread):
     PUBLIC = { "entries": entries, "ts": int(time.time()) }
     # ATOM XML API
     for e in entries:
-      refeed.add_item(e["title"], e["link"], "",
+      refeed.add_item(e["title"], e["link"], e["op_summary"],
           updateddate = datetime.strptime(e["updated"], "%Y-%m-%dT%H:%M:%SZ"))
     global PUBLIC_ATOM
     PUBLIC_ATOM = refeed.writeString("utf-8")
