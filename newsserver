@@ -8,7 +8,7 @@ import sys
 import threading
 import time
 import requests
-from datetime import datetime
+import datetime
 
 PUBLIC = {}
 PUBLIC_ATOM = ""
@@ -31,6 +31,10 @@ class Fetcher(threading.Thread):
       text = p.prettify(formatter="html")
       date = op.find("h2").find("a").text
       date = date.replace(" ", "T") + "Z"
+      if "Today" in date:
+        date = date.replace("Today", datetime.datetime.utcnow().strftime("%Y-%m-%d"))
+      elif "Yesterday" in date:
+        date = date.replace("Yesterday", (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime("%Y-%m-%d"))
     except BaseException as e:
       print("ERROR:", e)
     return { "updated": date, "summary": text }
@@ -52,7 +56,7 @@ class Fetcher(threading.Thread):
     # ATOM XML API
     for e in entries:
       refeed.add_item(e["title"], e["link"], e["op_summary"],
-          updateddate = datetime.strptime(e["updated"], "%Y-%m-%dT%H:%M:%SZ"))
+          updateddate = datetime.datetime.strptime(e["updated"], "%Y-%m-%dT%H:%M:%SZ"))
     global PUBLIC_ATOM
     PUBLIC_ATOM = refeed.writeString("utf-8")
 
