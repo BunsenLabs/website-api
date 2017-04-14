@@ -20,27 +20,32 @@ class Fetcher(threading.Thread):
     while not self.event.wait(timeout=900):
       self.update_feed_data()
 
-  def retrieve_op_summary(self, topic_url):
+  def retrieve_op_data(self, topic_url):
     text = ""
+    date = "2017-01-01T00:00:00Z"
     try:
       body = requests.get(topic_url).text
       soup = BeautifulSoup(body, "html.parser")
-      op = soup.find("div", { "class": "blockpost1" }).find("div", { "class":"postmsg"}).find("p")
-      text = op.prettify(formatter="html")
+      op = soup.find("div", { "class": "blockpost1" })
+      p = op.find("div", { "class":"postmsg"}).find("p")
+      text = p.prettify(formatter="html")
+      date = op.find("h2").find("a").text
+      date = date.replace(" ", "T") + "Z"
     except BaseException as e:
       print("ERROR:", e)
-    return text
+    return { "updated": date, "summary": text }
 
   def update_feed_data(self):
     feed = feedparser.parse("https://forums.bunsenlabs.org/extern.php?action=feed&fid=12&type=atom")
     refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', 'https://forums.bunsenlabs.org/viewforum.php?id=12', "")
-    entries = list(map(lambda e: {
-      "link":       self.head(e['link'], '&'),
-      "date":       self.head(e['updated'], 'T'),
-      "updated":    e['updated'],
-      "op_summary": self.retrieve_op_summary(e['link']),
-      "title":      " ".join(e['title'].split())
-      }, feed.entries))
+    def mapper(e):
+      opdata = self.retrieve_op_data(e['link'])
+      return {  "link":       self.head(e['link'], '&'),
+                "date":       self.head(e['updated'], 'T'),
+                "updated":    opdata['updated'],
+                "op_summary": opdata['summary'],
+                "title":      " ".join(e['title'].split()) }
+    entries = list(map(mapper, feed.entries))
     # JSON API
     global PUBLIC
     PUBLIC = { "entries": entries, "ts": int(time.time()) }
