@@ -28,6 +28,8 @@ class Fetcher(threading.Thread):
       soup = BeautifulSoup(body, "html.parser")
       op = soup.find("div", { "class": "blockpost1" })
       p = op.find("div", { "class":"postmsg"}).find("p")
+      for br in p.findAll("br"):
+        br.replace_with(' ')
       text = p.prettify(formatter="html")
       date = op.find("h2").find("a").text
       date = date.replace(" ", "T") + "Z"
