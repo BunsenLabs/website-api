@@ -48,7 +48,7 @@ class Fetcher(threading.Thread):
       opdata = self.retrieve_op_data(e['link'])
       return {  "link":       self.head(e['link'], '&'),
                 "date":       self.head(e['updated'], 'T'),
-                "updated":    opdata['updated'],
+                "updated":    self.head(opdata['updated'], 'T'),
                 "op_summary": opdata['summary'],
                 "title":      " ".join(e['title'].split()) }
     entries = list(map(mapper, feed.entries))
