@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
 
-from bottle import run, route, abort, response
+from argparse import Namespace
+from blwwwapi.worker import Worker
 from bs4 import BeautifulSoup
 from django.utils import feedgenerator
-import feedparser
-import sys
-import threading
-import time
-import requests
+from queue import Queue
+from typing import List
 import datetime
+import feedparser
+import requests
+import time
 
-PUBLIC = {}
-PUBLIC_ATOM = ""
-
-class Fetcher(threading.Thread):
+class News(Worker):
   def run(self):
-    self.event = threading.Event()
+    self._announcement_url = "{base_url}/extern.php?action=feed&fid=12&type=atom".format(
+        base_url=self._opts.forum_url)
+    self._info_forum_url = "{base_url}/viewforum.php?id=12".format(
+        base_url=self._opts.forum_url)
     self.update_feed_data()
-    while not self.event.wait(timeout=900):
+    while not self._waiter.wait(timeout=900):
+      if self.is_stopped():
+        return
       self.update_feed_data()
 
-  def retrieve_op_data(self, topic_url):
+  def retrieve_op_data(self, topic_url: str) -> dict:
     text = ""
     date = "2017-01-01T00:00:00Z"
     try:
@@ -41,9 +44,9 @@ class Fetcher(threading.Thread):
       print("ERROR:", e)
     return { "updated": date, "summary": text }
 
-  def update_feed_data(self):
-    feed = feedparser.parse("https://forums.bunsenlabs.org/extern.php?action=feed&fid=12&type=atom")
-    refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', 'https://forums.bunsenlabs.org/viewforum.php?id=12', "")
+  def update_feed_data(self) -> None:
+    feed = feedparser.parse(self._announcement_url)
+    refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', self._info_forum_url, "")
     def mapper(e):
       opdata = self.retrieve_op_data(e['link'])
       return {  "link":       self.head(e['link'], '&'),
@@ -53,30 +56,20 @@ class Fetcher(threading.Thread):
                 "title":      " ".join(e['title'].split()) }
     entries = list(map(mapper, feed.entries))
     # JSON API
-    global PUBLIC
-    PUBLIC = { "entries": entries, "ts": int(time.time()) }
+    self.emit(payload = {
+      "endpoint": "/feed/news",
+      "data": { "entries": entries, "ts": int(time.time()) }
+    })
     # ATOM XML API
     for e in entries:
       refeed.add_item(e["title"], e["link"], e["op_summary"],
-          updateddate = datetime.datetime.strptime(e["updated"], "%Y-%m-%dT%H:%M:%SZ"))
-    global PUBLIC_ATOM
-    PUBLIC_ATOM = refeed.writeString("utf-8")
+          updateddate = datetime.datetime.strptime(e["updated"], "%Y-%m-%d"))
+    self.emit(payload = {
+      "endpoint": "/feed/news/atom",
+      "data": refeed.writeString("utf-8"),
+      "content_type": "application/atom+xml; charset=utf-8"
+    })
 
   @staticmethod
-  def head(s, sep):
+  def head(s: str, sep: str) -> List[str]:
     return s.split(sep)[0]
-
-
-@route('/feed/news')
-def index():
-  return PUBLIC
-
-@route('/feed/news/atom')
-def idex():
-  response.content_type = "application/atom+xml; charset=utf-8"
-  return PUBLIC_ATOM
-
-if __name__ == "__main__":
-  fetcher = Fetcher()
-  fetcher.start()
-  run(host="localhost", port=10102, server="cherrypy")

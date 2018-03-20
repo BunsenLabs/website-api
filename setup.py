@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-        name = "bunsenlabs_website_api_services",
-        version = "1.0.0",
-        scripts = [
-                "tracker_status.py",
-                "news_server.py",
-        ],
+        name = "blwwwapi",
+        version = "1.0.2",
         install_requires = [
                 "bottle",
                 "beautifulsoup4",
@@ -16,8 +12,12 @@ setup(
                 "feedparser",
                 "requests",
         ],
-        include_package_data = True,
-
+        packages = find_packages(),
+        entry_points={
+                "console_scripts": [
+                        "blwwwapi = blwwwapi.__main__:main"
+                ]
+        },
         author = "Jens John",
         author_email = "dev@2ion.de",
         description = "BunsenLabs Website API Services",
