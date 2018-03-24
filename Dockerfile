@@ -1,5 +1,8 @@
-FROM alpine:latest
-RUN apk add --update python3
-RUN pip3 install --no-cache-dir blwwwapi
+FROM python:3.6-alpine
+ADD blwwwapi /opt/service/
+WORKDIR /opt/service
+RUN mkdir blwwwapi && mv *.py ./blwwwapi/
+ADD setup.py /opt/service/
+RUN python setup.py install
 EXPOSE 10000
-ENTRYPOINT /bin/sh
+ENTRYPOINT /usr/local/bin/blwwwapi
