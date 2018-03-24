@@ -10,7 +10,7 @@ import time
 class Tracker(Worker):
     def run(self):
         self.update_data()
-        while not self._waiter.wait(timeout=10):
+        while not self._waiter.wait(timeout=self._opts.tracker_update_interval):
             if self.is_stopped():
               return
             self.update_data()

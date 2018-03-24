@@ -18,7 +18,7 @@ class News(Worker):
     self._info_forum_url = "{base_url}/viewforum.php?id=12".format(
         base_url=self._opts.forum_url)
     self.update_feed_data()
-    while not self._waiter.wait(timeout=900):
+    while not self._waiter.wait(timeout=self._opts.news_update_interval):
       if self.is_stopped():
         return
       self.update_feed_data()
