@@ -12,7 +12,7 @@ ENDPOINT_DATA = {}
 
 def main():
   ap = ArgumentParser(description="""API endpoints for www.bunsenlabs.org""")
-  ap.add_argument("--bind-ip", default="0.0.0.0")
+  ap.add_argument("--bind-ip", default="127.0.0.1")
   ap.add_argument("--bind-port", type=int, default=10000)
   ap.add_argument("--forum-url", default="https://forums.bunsenlabs.org")
   ap.add_argument("--tracker-url", default="http://127.0.0.1:6969")
