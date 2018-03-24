@@ -11,6 +11,9 @@ class Worker(Thread):
     self._waiter = Event()
     super().__init__()
 
+  def log(self, msg):
+    print("[{id}] {msg}".format(id=self._id, msg=msg))
+
   def stop(self) -> None:
     self._stop_event.set()
 
