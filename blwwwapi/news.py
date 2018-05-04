@@ -41,7 +41,7 @@ class News(Worker):
       elif "Yesterday" in date:
         date = date.replace("Yesterday", (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime("%Y-%m-%d"))
     except BaseException as e:
-      print("ERROR:", e)
+      self.error(e)
     return { "updated": date, "summary": text }
 
   def update_feed_data(self) -> None:

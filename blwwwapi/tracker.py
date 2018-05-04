@@ -19,7 +19,7 @@ class Tracker(Worker):
         queuedata = {"torrents":{}}
         data = self.fetchot("mode=tpbs&format=txt")
         if data is None:
-          self.log("Could not fetch data.")
+          self.error("Could not fetch data.")
           return
         for line in data:
             [ hash, seeders, leechers ] = line.split(":", 3)

@@ -1,6 +1,7 @@
 from threading import Thread, Event
 from argparse import Namespace
 from queue import Queue
+from blwwwapi.logging import named_logger
 
 class Worker(Thread):
   def __init__(self, id: str, opts: Namespace, queue: Queue):
@@ -9,10 +10,14 @@ class Worker(Thread):
     self._queue = queue
     self._stop_event = Event()
     self._waiter = Event()
+    self._logger = named_logger(name=self._id)
     super().__init__(daemon=True)
 
-  def log(self, msg):
-    print("[{id}] {msg}".format(id=self._id, msg=msg))
+  def log(self, msg, *args, **kwargs):
+    self._logger.info(msg, *args, **kwargs)
+
+  def error(self, msg, *args, **kwargs):
+    self._logger.error(msg, *args, **kwargs)
 
   def stop(self) -> None:
     self._stop_event.set()

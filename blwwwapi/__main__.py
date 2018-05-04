@@ -2,11 +2,14 @@
 from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter
 from blwwwapi.news import News
 from blwwwapi.tracker import Tracker
+from blwwwapi.logging import named_logger
 from bottle import run, route, abort, response, install
 from queue import Queue, Empty
 from typing import Any
 import os
 import sys
+
+logger = named_logger()
 
 EMPTY={}
 ENDPOINT_DATA = {}
@@ -70,7 +73,9 @@ def main() -> int:
 
   for t in threads:
     t.stop()
-    t.join()
+    t.join(timeout=.1)
+    if t.is_alive():
+      logger.warning("Thread [{id}] is still alive".format(id=t._id))
 
   return 0
 
