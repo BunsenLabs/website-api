@@ -20,10 +20,10 @@ def get_options() -> Namespace:
       return local_preference
 
   ap = ArgumentParser(description="""API endpoints for www.bunsenlabs.org""", formatter_class=ArgumentDefaultsHelpFormatter)
-  ap.add_argument("--bind-ip", default=env("bind_ip", "0.0.0.0"), help="Bind IP address")
-  ap.add_argument("--bind-port", type=int, default=env("bind_port", 8080, type=int), help="Bind IP port")
+  ap.add_argument("--bind-ip", default=env("bind_ip", "127.0.0.1"), help="Bind IP address")
+  ap.add_argument("--bind-port", type=int, default=env("bind_port", 10000, type=int), help="Bind IP port")
   ap.add_argument("--forum-url", default=env("forum_url", "https://forums.bunsenlabs.org"), help="URL to the FluxBB forum endpoint to use")
-  ap.add_argument("--tracker-url", default=env("tracker_url", "http://tracker.bunsenlabs.org"), help="URL of the OpenTracker HTTP interface")
+  ap.add_argument("--tracker-url", default=env("tracker_url", "http://127.0.0.1:6969"), help="URL of the OpenTracker HTTP interface")
   ap.add_argument("--news-update-interval", type=int, default=env("news_update_interval", 10, type=int), help="News feed update interval in seconds.")
   ap.add_argument("--tracker-update-interval", type=int, default=env("tracker_update_interval", 10, type=int), help="OpenTracker stats update interval in seconds.")
 
