@@ -9,7 +9,7 @@ class Worker(Thread):
     self._queue = queue
     self._stop_event = Event()
     self._waiter = Event()
-    super().__init__()
+    super().__init__(daemon=True)
 
   def log(self, msg):
     print("[{id}] {msg}".format(id=self._id, msg=msg))
