@@ -30,10 +30,13 @@ class News(Worker):
       body = requests.get(topic_url).text
       soup = BeautifulSoup(body, "html.parser")
       op = soup.find("div", { "class": "blockpost1" })
+      # Summary
       p = op.find("div", { "class":"postmsg"}).find("p")
       for br in p.findAll("br"):
         br.replace_with(' ')
       text = p.prettify(formatter="html")
+      # Full text
+      fulltext = op.find("div", { "class":"postmsg"}).prettify(formatter="html")
       date = op.find("h2").find("a").text
       date = date.replace(" ", "T") + "Z"
       if "Today" in date:
@@ -42,28 +45,36 @@ class News(Worker):
         date = date.replace("Yesterday", (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime("%Y-%m-%d"))
     except BaseException as e:
       self.error(e)
-    return { "updated": date, "summary": text }
+    return { "updated": date, "summary": text, "fulltext": fulltext }
 
   def update_feed_data(self) -> None:
     feed = feedparser.parse(self._announcement_url)
     refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', self._info_forum_url, "")
-    def mapper(e):
-      opdata = self.retrieve_op_data(e['link'])
-      return {  "link":       self.head(e['link'], '&'),
-                "date":       self.head(e['updated'], 'T'),
-                "updated":    self.head(opdata['updated'], 'T'),
-                "op_summary": opdata['summary'],
-                "title":      " ".join(e['title'].split()) }
-    entries = list(map(mapper, feed.entries))
-    # JSON API
+    json_entries = []
+
+    for entry in feed.entries:
+      self.log("Loading {link}".format(link = entry['link']))
+      entry_data = self.retrieve_op_data(entry['link'])
+
+      title = " ".join(entry['title'].split())
+      link = self.head(entry['link'], '&')
+      date = self.head(entry['updated'], 'T')
+      updated = date
+      op_summary = entry_data['summary']
+      fulltext = entry_data['fulltext']
+
+      refeed.add_item(title, link, fulltext,
+          updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"))
+      json_entries.append({ "link":       link,
+                            "date":       date,
+                            "updated":    updated,
+                            "op_summary": op_summary,
+                            "title":      title })
+
     self.emit(payload = {
       "endpoint": "/feed/news",
-      "data": { "entries": entries, "ts": int(time.time()) }
+      "data": { "entries": json_entries, "ts": int(time.time()) }
     })
-    # ATOM XML API
-    for e in entries:
-      refeed.add_item(e["title"], e["link"], e["op_summary"],
-          updateddate = datetime.datetime.strptime(e["updated"], "%Y-%m-%d"))
     self.emit(payload = {
       "endpoint": "/feed/news/atom",
       "data": refeed.writeString("utf-8"),
