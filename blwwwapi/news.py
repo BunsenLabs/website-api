@@ -3,6 +3,7 @@
 from argparse import Namespace
 from blwwwapi.worker import Worker
 from bs4 import BeautifulSoup
+from concurrent.futures import ThreadPoolExecutor
 from django.utils import feedgenerator
 from queue import Queue
 from typing import List
@@ -23,7 +24,8 @@ class News(Worker):
         return
       self.update_feed_data()
 
-  def retrieve_op_data(self, topic_url: str) -> dict:
+  def retrieve_op_data(self, entry) -> dict:
+    topic_url = entry['link']
     text = ""
     date = "2017-01-01T00:00:00Z"
     try:
@@ -51,25 +53,23 @@ class News(Worker):
     feed = feedparser.parse(self._announcement_url)
     refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', self._info_forum_url, "")
     json_entries = []
+    entry_data = None
 
-    for entry in feed.entries:
-      self.log("Loading {link}".format(link = entry['link']))
-      entry_data = self.retrieve_op_data(entry['link'])
+    with ThreadPoolExecutor(max_workers=4) as executor:
+      for entry, entry_data in zip(feed.entries,
+          executor.map(self.retrieve_op_data, feed.entries)):
 
-      title = " ".join(entry['title'].split())
-      link = self.head(entry['link'], '&')
-      date = self.head(entry['updated'], 'T')
-      updated = date
-      op_summary = entry_data['summary']
-      fulltext = entry_data['fulltext']
+          title = " ".join(entry['title'].split())
+          link = self.head(entry['link'], '&')
+          date = self.head(entry['updated'], 'T')
+          updated = date
+          op_summary = entry_data['summary']
+          fulltext = entry_data['fulltext']
 
-      refeed.add_item(title, link, fulltext,
-          updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"))
-      json_entries.append({ "link":       link,
-                            "date":       date,
-                            "updated":    updated,
-                            "op_summary": op_summary,
-                            "title":      title })
+          self.log("News item <{title}>".format(title = title))
+
+          refeed.add_item(title, link, fulltext, updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"))
+          json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
 
     self.emit(payload = {
       "endpoint": "/feed/news",
