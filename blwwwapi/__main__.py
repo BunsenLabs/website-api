@@ -27,7 +27,7 @@ def get_options() -> Namespace:
   ap.add_argument("--bind-port", type=int, default=env("bind_port", 10000, type=int), help="Bind IP port")
   ap.add_argument("--forum-url", default=env("forum_url", "https://forums.bunsenlabs.org"), help="URL to the FluxBB forum endpoint to use")
   ap.add_argument("--tracker-url", default=env("tracker_url", "http://127.0.0.1:6969"), help="URL of the OpenTracker HTTP interface")
-  ap.add_argument("--news-update-interval", type=int, default=env("news_update_interval", 10, type=int), help="News feed update interval in seconds.")
+  ap.add_argument("--news-update-interval", type=int, default=env("news_update_interval", 900, type=int), help="News feed update interval in seconds.")
   ap.add_argument("--tracker-update-interval", type=int, default=env("tracker_update_interval", 10, type=int), help="OpenTracker stats update interval in seconds.")
 
   return ap.parse_args()
