@@ -73,15 +73,16 @@ class News(Worker):
           updated = date
           op_summary = entry_data['summary']
           fulltext = entry_data['fulltext']
+          unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link)
 
-          self.log("News item <{title}>".format(title = title))
+          self.log("News item {uuid} ({title})".format(uuid=unique_id,title = title))
 
           refeed.add_item(
               title,
               link,
               fulltext,
               updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"),
-              unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link))
+              unique_id = unique_id
           )
           json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
 
