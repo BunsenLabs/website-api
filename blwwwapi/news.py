@@ -11,8 +11,11 @@ import datetime
 import feedparser
 import requests
 import time
+import uuid
 
 class News(Worker):
+  __feed_guid = uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org")
+
   def run(self):
     self._announcement_url = "{base_url}/extern.php?action=feed&fid=12&type=atom".format(
         base_url=self._opts.forum_url)
@@ -50,10 +53,15 @@ class News(Worker):
     return { "updated": date, "summary": text, "fulltext": fulltext }
 
   def update_feed_data(self) -> None:
-    feed = feedparser.parse(self._announcement_url)
-    refeed = feedgenerator.Atom1Feed('BunsenLabs Linux News', self._info_forum_url, "")
     json_entries = []
     entry_data = None
+
+    feed = feedparser.parse(self._announcement_url)
+    refeed = feedgenerator.Atom1Feed(
+        'BunsenLabs Linux News',
+        self._info_forum_url,
+        "",
+        feed_guid=self.__feed_guid)
 
     with ThreadPoolExecutor(max_workers=4) as executor:
       for entry, entry_data in zip(feed.entries,
@@ -68,7 +76,13 @@ class News(Worker):
 
           self.log("News item <{title}>".format(title = title))
 
-          refeed.add_item(title, link, fulltext, updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"))
+          refeed.add_item(
+              title,
+              link,
+              fulltext,
+              updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"),
+              unique_id = uuid.uuid5(uuid.NAMESPACE_URL, link)
+          )
           json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
 
     self.emit(payload = {
