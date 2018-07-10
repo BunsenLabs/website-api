@@ -69,7 +69,12 @@ def main() -> int:
   for t in threads:
     t.start()
 
-  run(host=opts.bind_ip, port=opts.bind_port, server="auto")
+  run(
+      host=opts.bind_ip,
+      port=opts.bind_port,
+      server="auto",
+      quiet=True
+  )
 
   for t in threads:
     t.stop()
