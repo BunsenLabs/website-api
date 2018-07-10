@@ -73,7 +73,7 @@ class News(Worker):
           updated = date
           op_summary = entry_data['summary']
           fulltext = entry_data['fulltext']
-          unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link)
+          unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link))
 
           self.log("News item {uuid} ({title})".format(uuid=unique_id,title = title))
 
