@@ -14,7 +14,7 @@ import time
 import uuid
 
 class News(Worker):
-  __feed_guid = uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org")
+  __feed_guid = str(uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org"))
 
   def run(self):
     self._announcement_url = "{base_url}/extern.php?action=feed&fid=12&type=atom".format(
@@ -81,7 +81,7 @@ class News(Worker):
               link,
               fulltext,
               updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"),
-              unique_id = uuid.uuid5(uuid.NAMESPACE_URL, link)
+              unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link))
           )
           json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
 
