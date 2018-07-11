@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 ADD blwwwapi /opt/service/
 WORKDIR /opt/service
 RUN mkdir blwwwapi && mv *.py ./blwwwapi/
