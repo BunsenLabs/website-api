@@ -20,8 +20,8 @@ class Worker(Thread):
     self._logger.error(msg, *args, **kwargs)
 
   def stop(self) -> None:
-    self._waiter.set()
     self._stop_event.set()
+    self._waiter.set()
 
   def is_stopped(self) -> bool:
     return self._stop_event.is_set()
