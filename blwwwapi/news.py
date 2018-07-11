@@ -92,8 +92,7 @@ class News(Worker):
     })
     self.emit(payload = {
       "endpoint": "/feed/news/atom",
-      "data": refeed.writeString("utf-8"),
-      "content_type": "application/atom+xml; charset=utf-8"
+      "data": refeed.writeString("utf-8")
     })
 
   @staticmethod
