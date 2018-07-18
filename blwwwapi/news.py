@@ -30,7 +30,7 @@ class News(Worker):
   def retrieve_op_data(self, entry) -> dict:
     topic_url = entry['link']
     text = ""
-    date = "2017-01-01T00:00:00Z"
+    date = ""
     try:
       body = requests.get(topic_url).text
       soup = BeautifulSoup(body, "html.parser")
@@ -43,7 +43,8 @@ class News(Worker):
       # Full text
       fulltext = op.find("div", { "class":"postmsg"}).prettify(formatter="html")
       date = op.find("h2").find("a").text
-      date = date.replace(" ", "T") + "Z"
+      date = date.split(" ")[0]
+      print(date)
       if "Today" in date:
         date = date.replace("Today", datetime.datetime.utcnow().strftime("%Y-%m-%d"))
       elif "Yesterday" in date:
@@ -70,12 +71,13 @@ class News(Worker):
           title = " ".join(entry['title'].split())
           link = self.head(entry['link'], '&')
           date = self.head(entry['updated'], 'T')
-          updated = date
+          updated = entry_data['updated']
           op_summary = entry_data['summary']
           fulltext = entry_data['fulltext']
           unique_id = str(uuid.uuid5(uuid.NAMESPACE_URL, link))
 
-          self.log("News item {uuid} ({title})".format(uuid=unique_id,title = title))
+          self.log("News item {uuid} updated {updated} ({title})".format(
+            uuid=unique_id,title = title, updated=updated))
 
           refeed.add_item(
               title,
