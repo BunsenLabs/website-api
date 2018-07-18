@@ -44,7 +44,6 @@ class News(Worker):
       fulltext = op.find("div", { "class":"postmsg"}).prettify(formatter="html")
       date = op.find("h2").find("a").text
       date = date.split(" ")[0]
-      print(date)
       if "Today" in date:
         date = date.replace("Today", datetime.datetime.utcnow().strftime("%Y-%m-%d"))
       elif "Yesterday" in date:
@@ -86,7 +85,9 @@ class News(Worker):
               updateddate = datetime.datetime.strptime(updated, "%Y-%m-%d"),
               unique_id = unique_id
           )
+
           json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
+          json_entries = sorted(json_entries, key=lambda e: e['updated'], reverse=True)
 
     self.emit(payload = {
       "endpoint": "/feed/news",
