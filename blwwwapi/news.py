@@ -87,12 +87,13 @@ class News(Worker):
           )
 
           json_entries.append({ "link": link, "date": date, "updated": updated, "op_summary": op_summary, "title": title })
-          json_entries = sorted(json_entries, key=lambda e: e['updated'], reverse=True)
 
+    json_entries = sorted(json_entries, key=lambda e: e['updated'], reverse=True)
     self.emit(payload = {
       "endpoint": "/feed/news",
       "data": { "entries": json_entries, "ts": int(time.time()) }
     })
+
     self.emit(payload = {
       "endpoint": "/feed/news/atom",
       "data": refeed.writeString("utf-8")
