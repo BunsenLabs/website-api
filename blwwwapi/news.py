@@ -20,8 +20,8 @@ class News(Worker):
     try:
       self.mainloop()
     except Exception as err:
-      self.log("ERROR: exception caught in mainloop(): {}".format(err))
-      self.log("Restarting main loop...")
+      self.error("exception caught in main loop: {}".format(err))
+      self.error("restarting main loop...")
       self.run()
 
   def mainloop(self):
