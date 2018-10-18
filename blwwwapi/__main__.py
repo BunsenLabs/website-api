@@ -72,7 +72,7 @@ def main() -> int:
   run(
       host=opts.bind_ip,
       port=opts.bind_port,
-      server="auto",
+      server="tornado",
       quiet=True
   )
 

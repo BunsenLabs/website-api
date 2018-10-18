@@ -11,6 +11,7 @@ setup(
                 "Django",
                 "feedparser",
                 "requests",
+                "tornado"
         ],
         packages = find_packages(),
         entry_points={
