@@ -14,6 +14,7 @@ class Tracker(Worker):
             if self.is_stopped():
               return
             self.update_data()
+        return 0
 
     def update_data(self):
         queuedata = {"torrents":{}}

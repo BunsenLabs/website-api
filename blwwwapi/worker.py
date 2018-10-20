@@ -16,7 +16,7 @@ class Worker(Thread):
 
   def run(self):
     try:
-      self.main()
+      return self.main()
     except Exception as err:
       self.error("Exception caught in main loop: {}".format(err))
       self._lives -= 1

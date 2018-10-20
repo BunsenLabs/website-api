@@ -26,6 +26,7 @@ class News(Worker):
       if self.is_stopped():
         return
       self.update_feed_data()
+    return 0
 
   def retrieve_op_data(self, entry) -> dict:
     topic_url = entry['link']
