@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-from argparse import Namespace
 from blwwwapi.worker import Worker
-from queue import Queue
 from typing import Union, List
 import requests
 import time

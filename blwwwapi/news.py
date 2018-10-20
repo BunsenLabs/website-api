@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
-from argparse import Namespace
 from blwwwapi.worker import Worker
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 from django.utils import feedgenerator
-from queue import Queue
 from typing import List
 import datetime
 import feedparser
