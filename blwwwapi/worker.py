@@ -11,7 +11,23 @@ class Worker(Thread):
     self._stop_event = Event()
     self._waiter = Event()
     self._logger = named_logger(name=self._id)
+    self._lives = 3
     super().__init__(daemon=True)
+
+  def run(self):
+    try:
+      self.main()
+    except Exception as err:
+      self.error("Exception caught in main loop: {}".format(err))
+      self._lives -= 1
+      if self._lives >= 0:
+        self.error("Remaining lives: {}".format(self._lives))
+        self.error("Trying to restart main loop...")
+        self.run()
+      else:
+        self.error("Exhausted all lives, dying...")
+        return 1
+    return 0
 
   def log(self, msg, *args, **kwargs):
     self._logger.info(msg, *args, **kwargs)

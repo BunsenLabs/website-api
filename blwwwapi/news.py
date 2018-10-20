@@ -16,15 +16,7 @@ import uuid
 class News(Worker):
   __feed_guid = str(uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org"))
 
-  def run(self):
-    try:
-      self.mainloop()
-    except Exception as err:
-      self.error("exception caught in main loop: {}".format(err))
-      self.error("restarting main loop...")
-      self.run()
-
-  def mainloop(self):
+  def main(self):
     self._announcement_url = "{base_url}/extern.php?action=feed&fid=12&type=atom".format(
         base_url=self._opts.forum_url)
     self._info_forum_url = "{base_url}/viewforum.php?id=12".format(
