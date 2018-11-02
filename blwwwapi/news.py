@@ -30,6 +30,7 @@ class News(Worker):
     topic_url = entry['link']
     text = ""
     date = ""
+    fulltext = ""
     try:
       body = requests.get(topic_url).text
       soup = BeautifulSoup(body, "html.parser")
@@ -49,7 +50,9 @@ class News(Worker):
         date = date.replace("Yesterday", (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime("%Y-%m-%d"))
     except BaseException as e:
       self.error(e)
-    return { "updated": date, "summary": text, "fulltext": fulltext }
+      self.error(f"topic_url={topic_url}, text={text}, date={date}")
+    finally:
+      return { "updated": date, "summary": text, "fulltext": fulltext }
 
   def update_feed_data(self) -> None:
     json_entries = []
