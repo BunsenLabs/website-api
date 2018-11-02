@@ -27,9 +27,9 @@ class News(Worker):
     return 0
 
   def retrieve_op_data(self, entry) -> dict:
-    topic_url = entry['link']
+    topic_url = entry['link'].split("&")[0]
     text = ""
-    date = ""
+    date = "1999-01-01"
     fulltext = ""
     try:
       body = requests.get(topic_url).text
