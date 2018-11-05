@@ -23,6 +23,7 @@ class Tracker(Worker):
         for line in data:
             [ hash, seeders, leechers ] = line.split(":", 3)
             queuedata["torrents"][hash.lower()] = { "s":int(seeders), "l":int(leechers) }
+            self.log(f"Discovered torrent {hash} having {seeders} seeders and {leechers} leechers")
         queuedata["ts"] = int(time.time())
         self.emit(payload = {
             "endpoint": "/tracker/status",
