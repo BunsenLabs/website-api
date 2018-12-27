@@ -1,0 +1,11 @@
+BunsenLabs Website API Services
+===============================
+
+Roadmap to next release
+-----------------------
+
+ * Validation of inter-thread messages against schema
+ * Worker ID should determine URL path ownership and limit write permissions
+   * `tracker` → `/tracker/:next`
+   * `feed` → `/feed/:next`
+    * Must not change because already used by third parties (Planet Debian)
