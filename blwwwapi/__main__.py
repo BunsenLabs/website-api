@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter
 from blwwwapi.logging import named_logger
+from blwwwapi.message import Message
 from blwwwapi.news import News
 from blwwwapi.tracker import Tracker
 from bottle import run, route, abort, response, install
@@ -8,6 +8,7 @@ from queue import Queue, Empty
 from typing import Any
 import blwwwapi.options
 import os
+import pickle
 import sys
 
 logger = named_logger()
@@ -24,13 +25,26 @@ def main() -> int:
   ]
 
   def poll_queue(key):
+
     while True:
       try:
-        (id, payload) = queue.get(block=False)
-        ENDPOINT_DATA[payload["endpoint"]] = payload["data"]
+        id, data = queue.get(block=False)
         queue.task_done()
+        try:
+          msg = pickle.loads(data)
+        except pickle.PickleError as err:
+          logger.error(f"Failed to unpickle a message from worker: {id}")
+          sys.exit(os.EX_PROTOCOL)
+        if msg.verb == "PUT":
+          ep = msg.payload["endpoint"]
+          ep_data = msg.payload["data"]
+          ENDPOINT_DATA[ep] = ep_data
+        if msg.verb == "CLEAR":
+          ep = msg.payload["endpoint"]
+          ENDPOINT_DATA[ep] == EMPTY
       except Empty:
         break
+
     if key in ENDPOINT_DATA:
       return ENDPOINT_DATA[key]
     else:

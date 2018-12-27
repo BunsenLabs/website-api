@@ -1,7 +1,9 @@
-from threading import Thread, Event
 from argparse import Namespace
-from queue import Queue
 from blwwwapi.logging import named_logger
+from blwwwapi.message import Message
+from queue import Queue
+from threading import Thread, Event
+import pickle
 
 class Worker(Thread):
   def __init__(self, id: str, opts: Namespace, queue: Queue):
@@ -43,4 +45,5 @@ class Worker(Thread):
     return self._stop_event.is_set()
 
   def emit(self, payload = { "endpoint": "/", "data": str() }) -> None:
-    self._queue.put((self._id, payload,))
+    msg = Message(sender=self._id,verb="PUT",payload=payload)
+    self._queue.put((self._id, pickle.dumps(msg, pickle.HIGHEST_PROTOCOL),))
