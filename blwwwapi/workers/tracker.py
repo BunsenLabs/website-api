@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from blwwwapi.worker import Worker
+from blwwwapi.workers.base import WorkerBase
 from typing import Union, List
 import requests
 import time
 
-class Tracker(Worker):
+class Tracker(WorkerBase):
     _id = "tracker"
     def main(self):
         self.update_data()

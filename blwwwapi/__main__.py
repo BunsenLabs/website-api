@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from blwwwapi.logging import named_logger
 from blwwwapi.message import Message
-from blwwwapi.news import News
-from blwwwapi.tracker import Tracker
+from blwwwapi.workers.news import News
+from blwwwapi.workers.tracker import Tracker
 from bottle import run, route, abort, response, install
 from queue import Queue, Empty
 from typing import Any

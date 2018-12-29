@@ -5,7 +5,7 @@ from queue import Queue
 from threading import Thread, Event
 import pickle
 
-class Worker(Thread):
+class WorkerBase(Thread):
   _id = None
   def __init__(self, opts: Namespace, queue: Queue):
     if self._id is None:

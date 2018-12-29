@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from blwwwapi.worker import Worker
+from blwwwapi.workers.base import WorkerBase
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 from django.utils import feedgenerator
@@ -11,7 +11,7 @@ import requests
 import time
 import uuid
 
-class News(Worker):
+class News(WorkerBase):
   _id = "feed"
   __feed_guid = str(uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org"))
 
