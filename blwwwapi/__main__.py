@@ -18,6 +18,7 @@ ENDPOINT_DATA = {}
 
 def check_namespace_access(thread_id: str, endpoint: str) -> bool:
   if not endpoint.startswith(f"/{thread_id}"):
+    logger.warning(f"Thread {thread_id} tried accessing foreign endpoint {endpoint}")
     return False
   return True
 
@@ -32,16 +33,12 @@ def main() -> int:
     data = msg.payload["data"]
     if check_namespace_access(id, endpoint):
       ENDPOINT_DATA[endpoint] = data
-    else:
-      logger.warning(f"Thread {id} tried writing to foreign endpoint {endpoint}")
 
   def _clear(msg):
     id = msg.sender
     endpoint = msg.payload["endpoint"]
     if check_namespace_access(id, endpoint):
       ENDPOINT_DATA[endpoint] = EMPTY
-    else:
-      logger.warning(f"Thread {id} tried clearing foreign endpoint {endpoint}")
 
   jump = { "PUT": _put, "CLEAR": _clear }
 
