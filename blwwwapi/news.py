@@ -12,6 +12,7 @@ import time
 import uuid
 
 class News(Worker):
+  _id = "feed"
   __feed_guid = str(uuid.uuid5(uuid.NAMESPACE_DNS, "forums.bunsenlabs.org"))
 
   def main(self):

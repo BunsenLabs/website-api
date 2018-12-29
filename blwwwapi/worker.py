@@ -6,8 +6,10 @@ from threading import Thread, Event
 import pickle
 
 class Worker(Thread):
-  def __init__(self, id: str, opts: Namespace, queue: Queue):
-    self._id = id
+  _id = None
+  def __init__(self, opts: Namespace, queue: Queue):
+    if self._id is None:
+      self._id = "unknown"
     self._opts = opts
     self._queue = queue
     self._stop_event = Event()

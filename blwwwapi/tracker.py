@@ -6,6 +6,7 @@ import requests
 import time
 
 class Tracker(Worker):
+    _id = "tracker"
     def main(self):
         self.update_data()
         while not self._waiter.wait(timeout=self._opts.tracker_update_interval):
