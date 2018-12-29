@@ -33,7 +33,7 @@ def main() -> int:
     if check_namespace_access(id, endpoint):
       ENDPOINT_DATA[endpoint] = data
     else:
-      logging.warning(f"Thread {id} tried writing to foreign endpoint {endpoint}")
+      logger.warning(f"Thread {id} tried writing to foreign endpoint {endpoint}")
 
   def _clear(msg):
     id = msg.sender
@@ -41,7 +41,7 @@ def main() -> int:
     if check_namespace_access(id, endpoint):
       ENDPOINT_DATA[endpoint] = EMPTY
     else:
-      logging.warning(f"Thread {id} tried clearing foreign endpoint {endpoint}")
+      logger.warning(f"Thread {id} tried clearing foreign endpoint {endpoint}")
 
   jump = { "PUT": _put, "CLEAR": _clear }
 
