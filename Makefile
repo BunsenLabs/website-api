@@ -1,15 +1,20 @@
-build:
-	docker build --rm . -t blwwwapi:latest
+CONTAINER ?= www-api
+IMAGE ?= blwwwapi
+TAG ?= latest
+CONTAINER_IMAGE ?= $(IMAGE):$(TAG)
 
-start:
-	docker run -dit --network=host --name www-api blwwwapi:latest
+start-container:
+	docker run -dit --network=host --log-opt max-size=10m --log-opt max-file=1 --name $(CONTAINER) $(CONTAINER_IMAGE)
 
-replace: build
-	docker stop www-api
-	docker rm www-api
-	docker run -dit --network=host --name www-api blwwwapi:latest
+stop-container:
+	-docker stop $(CONTAINER)
 
-stop:
-	docker stop www-api
+build-container:
+	docker build --rm . -t $(CONTAINER_IMAGE)
 
-.PHONY: build start
+remove-container: | stop-container
+	-docker rm $(CONTAINER)
+
+replace: | build-container remove-container start-container
+
+.PHONY: start-container stop-container build-container remove-container replace
