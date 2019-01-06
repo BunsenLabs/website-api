@@ -4,14 +4,15 @@ from setuptools import setup, find_packages
 
 setup(
         name = "blwwwapi",
-        version = "1.0.4",
+        version = "1.0.5",
         install_requires = [
                 "bottle",
                 "beautifulsoup4",
                 "Django",
                 "feedparser",
                 "requests",
-                "tornado"
+                "tornado",
+                "PyYAML"
         ],
         packages = find_packages(),
         entry_points={
@@ -24,6 +25,7 @@ setup(
         description = "BunsenLabs Website API Services",
         license = "GPL3",
         keywords = "bunsenlabs service website",
-        url = "https://github.com/bunsenlabs/bunsen-website"
+        url = "https://github.com/bunsenlabs/bunsen-website",
+        include_package_data=True,
 )
 
