@@ -12,6 +12,7 @@ options:
 
   - names: [ '--bind-port', '-p' ]
     default: !Env [ 'bind_port', 10000 ]
+    type: !!python/name:builtins.int ''
     help: |
       Bind port on the local host.
 
@@ -36,3 +37,8 @@ options:
     type: !!python/name:builtins.int ''
     help: |
       Interval in seconds between tracker status updates.
+
+  - names: [ '--workers', '-w' ]
+    default: !Env [ 'workers', 'tracker,feed' ]
+    help: |
+      Specify which workers to start.

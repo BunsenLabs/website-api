@@ -23,9 +23,7 @@ def check_namespace_access(thread_id: str, endpoint: str) -> bool:
   return True
 
 def main() -> int:
-  opts = blwwwapi.options.get()
   queue = Queue()
-  threads = [ News(opts, queue), Tracker(opts, queue) ]
 
   def _put(msg):
     id = msg.sender
@@ -76,8 +74,20 @@ def main() -> int:
   def r_tracker_status():
     return poll_queue("/tracker/status")
 
-  for t in threads:
-    t.start()
+  opts = blwwwapi.options.get()
+  whitelist = opts.workers.split(",")
+  classes = [ News, Tracker ]
+  params = (opts,queue,)
+  threads = []
+
+  for cls in classes:
+    if cls._id in whitelist:
+      logger.info(f"Starting worker: {cls._id}")
+      thread = cls(*params)
+      thread.start()
+      threads.append(thread)
+    else:
+      logger.info(f"Worker is disabled: {cls._id}")
 
   run(
       host=opts.bind_ip,
@@ -90,7 +100,7 @@ def main() -> int:
     t.stop()
     t.join(timeout=.1)
     if t.is_alive():
-      logger.warning("Thread [{id}] is still alive".format(id=t._id))
+      logger.warning(f"Worker is still alive after joining: {t._id}")
 
   return 0
 
