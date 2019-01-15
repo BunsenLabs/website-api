@@ -7,6 +7,8 @@ import time
 
 class Tracker(WorkerBase):
     _id = "tracker"
+    __known_torrents = []
+
     def main(self):
         self.update_data()
         while not self._waiter.wait(timeout=self._opts.tracker_update_interval):
@@ -24,7 +26,13 @@ class Tracker(WorkerBase):
         for line in data:
             [ hash, seeders, leechers ] = line.split(":", 3)
             queuedata["torrents"][hash.lower()] = { "s":int(seeders), "l":int(leechers) }
-            self.log(f"Discovered torrent {hash} having {seeders} seeders and {leechers} leechers")
+            if not hash in self._known_torrents:
+                self.__known_torrents.append(hash)
+                self.log(f"Discovered torrent {hash} having {seeders} seeders and {leechers} leechers")
+        for hash in self._known_torrents:
+            if not hash in queuedata["torrents"]:
+                self.__known_torrents.remove(hash)
+                self.log(f"Torrent {hash} vanished")
         queuedata["ts"] = int(time.time())
         self.emit(payload = {
             "endpoint": "/tracker/status",
