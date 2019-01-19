@@ -1,0 +1,9 @@
+endpoint:
+  type: string
+  required: True
+data:
+  type: 
+    - dict
+    - integer
+    - string
+  required: True
