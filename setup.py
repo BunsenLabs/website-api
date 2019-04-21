@@ -12,7 +12,7 @@ setup(
                 "feedparser",
                 "requests",
                 "tornado",
-                "PyYAML",
+                "PyYAML==3.13",
                 "Cerberus"
         ],
         packages = find_packages(),
