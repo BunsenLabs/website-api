@@ -38,4 +38,4 @@ class Message:
 
     v = Validator(SCHEMA[verb])
     if not v.validate(self.payload):
-      raise ValueError(f"Schema validation failed: {self}")
+      raise ValueError(f"Schema validation failed for {self}: {v._errors}")
