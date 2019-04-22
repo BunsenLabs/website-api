@@ -6,14 +6,14 @@ setup(
         name = "blwwwapi",
         version = "1.0.5",
         install_requires = [
-                "bottle",
-                "beautifulsoup4",
-                "Django",
-                "feedparser",
-                "requests",
-                "tornado",
+                "bottle==0.12.16",
+                "beautifulsoup4==4.7.1",
+                "Django==2.2",
+                "feedparser==5.2.1",
+                "requests==2.21.0",
+                "tornado==5.1.1",
                 "PyYAML==3.13",
-                "Cerberus"
+                "Cerberus==1.2"
         ],
         packages = find_packages(),
         entry_points={
