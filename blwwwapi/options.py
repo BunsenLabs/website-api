@@ -17,8 +17,8 @@ def yaml_env_constructor(loader, node):
 
 def get() -> Namespace:
     with open(__OPTIONPATH__, "r") as FILE:
-        yaml.add_constructor('!Env', yaml_env_constructor, Loader=yaml.CFullLoader)
-        spec = yaml.load(FILE, Loader=yaml.CFullLoader)
+        yaml.add_constructor('!Env', yaml_env_constructor, Loader=yaml.FullLoader)
+        spec = yaml.load(FILE, Loader=yaml.FullLoader)
     p = ArgumentParser(description=spec['program_description'],
             formatter_class=ArgumentDefaultsHelpFormatter)
     for opt in spec['options']:
