@@ -20,11 +20,13 @@ class Message:
   sender: str
   verb: str
   payload: dict = field(default_factory=dict)
+  validate: bool = False
 
   __verbs = [ "PUT", "CLEAR" ]
 
   def __post_init__(self):
-    self.__validate()
+    if self.validate:
+      self.__validate()
 
   def __validate(self):
     if not isinstance(self.sender, str):

@@ -47,5 +47,9 @@ class WorkerBase(Thread):
     return self._stop_event.is_set()
 
   def emit(self, payload = { "endpoint": "/", "data": str() }) -> None:
-    msg = Message(sender=self._id,verb="PUT",payload=payload)
+    msg = Message(
+        sender=self._id,
+        verb="PUT",
+        payload=payload,
+        validate=self._opts.ipc_message_validation)
     self._queue.put((self._id, pickle.dumps(msg, pickle.HIGHEST_PROTOCOL),))

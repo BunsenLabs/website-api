@@ -13,7 +13,7 @@ setup(
                 "requests==2.21.0",
                 "tornado==5.1.1",
                 "PyYAML>=5.1.1",
-                "Cerberus==1.2"
+                "Cerberus>=1.3.1"
         ],
         packages = find_packages(),
         entry_points={

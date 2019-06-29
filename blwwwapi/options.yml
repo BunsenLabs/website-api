@@ -42,3 +42,9 @@ options:
     default: !Env [ 'workers', 'tracker,feed' ]
     help: |
       Specify which workers to start.
+
+  - names: [ '--ipc-message-validation' ]
+    default: !Env [ 'ipc_message_validation', 0 ]
+    type: !!python/name:builtins.bool ''
+    help: |
+      Enable experimental IPC message validation.
