@@ -4,16 +4,16 @@ from setuptools import setup, find_packages
 
 setup(
         name = "blwwwapi",
-        version = "1.0.5",
+        version = "1.0.6",
         install_requires = [
-                "bottle==0.12.16",
-                "beautifulsoup4==4.7.1",
-                "Django>=2.2.2",
-                "feedparser==5.2.1",
-                "requests==2.21.0",
-                "tornado==5.1.1",
+                "bottle",
+                "beautifulsoup4",
+                "Django",
+                "feedparser",
+                "requests",
+                "tornado",
                 "PyYAML>=5.1.1",
-                "Cerberus>=1.3.1"
+                "Cerberus"
         ],
         packages = find_packages(),
         entry_points={
