@@ -1,8 +1,6 @@
 FROM python:3.7-alpine
-ADD blwwwapi /opt/service/
+ADD dist/*.tar.gz /opt/service/
 WORKDIR /opt/service
-RUN mkdir blwwwapi && mv *.py *.yml message/ workers/ ./blwwwapi/
-ADD setup.py MANIFEST.in /opt/service/
-RUN python setup.py install
+RUN cd * && python setup.py install
 EXPOSE 10000
 ENTRYPOINT /usr/local/bin/blwwwapi

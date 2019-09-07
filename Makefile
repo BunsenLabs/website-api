@@ -9,11 +9,16 @@ start-container:
 stop-container:
 	-docker stop $(CONTAINER)
 
-build-container:
+build-container: dist
 	docker build --rm . -t $(CONTAINER_IMAGE)
 
 remove-container: | stop-container
 	-docker rm $(CONTAINER)
+
+.PHONY: dist
+dist: setup.py
+	rm -- dist/*
+	python setup.py sdist
 
 replace: | build-container remove-container start-container
 
