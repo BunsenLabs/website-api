@@ -43,12 +43,7 @@ class Broker(Thread):
         except pickle.PickleError as err:
           self.logger.error(f"Failed to unpickle a message from worker: {id}")
           sys.exit(os.EX_PROTOCOL)
-        if msg.verb == 'PUT':
           self._put(msg)
-        elif msg.verb == 'CLEAR':
-          self._clear(msg)
-        else:
-          self.logger.error(f"Received message with unknown verb: {msg.verb}")
       except Empty:
         pass
 
@@ -59,13 +54,6 @@ class Broker(Thread):
     if self._check_namespace_access(id, endpoint):
       with self.lock:
         self.data[endpoint] = data
-
-  def _clear(self, msg):
-    id = msg.sender
-    endpoint = msg.payload["endpoint"]
-    if self._check_namespace_access(id, endpoint):
-      with self.lock:
-        self.data[endpoint] = EMPTY
 
   def _check_namespace_access(self, thread_id: str, endpoint: str) -> bool:
     if not endpoint.startswith(f"/{thread_id}"):
