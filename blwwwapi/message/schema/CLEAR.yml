@@ -1,3 +1,0 @@
-endpoint:
-  type: string
-  required: True

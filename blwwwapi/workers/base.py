@@ -50,6 +50,5 @@ class WorkerBase(Thread):
     msg = Message(
         sender=self._id,
         verb="PUT",
-        payload=payload,
-        validate=self._opts.ipc_message_validation)
+        payload=payload)
     self._queue.put((self._id, pickle.dumps(msg, pickle.HIGHEST_PROTOCOL),))

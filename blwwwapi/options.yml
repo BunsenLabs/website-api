@@ -39,12 +39,6 @@ options:
       Interval in seconds between tracker status updates.
 
   - names: [ '--workers', '-w' ]
-    default: !Env [ 'workers', 'tracker,feed' ]
+    default: !Env [ 'workers', 'feed' ]
     help: |
       Specify which workers to start.
-
-  - names: [ '--ipc-message-validation' ]
-    default: !Env [ 'ipc_message_validation', 0 ]
-    type: !!python/name:builtins.bool ''
-    help: |
-      Enable experimental IPC message validation.
