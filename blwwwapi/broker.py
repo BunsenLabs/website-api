@@ -14,7 +14,7 @@ class Broker(Thread):
   def __init__(self, opts: Namespace = Namespace()):
     self.data = {}
     self.logger = named_logger()
-    self.queue = Queue()
+    self.queue = Queue(maxsize=512)
     self.workers = [ News, Tracker ]
     self.params = (opts,self.queue,)
     self.threads = []

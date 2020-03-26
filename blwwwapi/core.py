@@ -23,8 +23,14 @@ class TrackerStatus(Resource):
   def get(self):
     return broker.query('/tracker/status')
 
-api.add_resource(Newsfeed, '/feed/news', '/feed/news/<string:format>')
-api.add_resource(TrackerStatus, '/tracker/status')
+api.add_resource(Newsfeed,
+    '/api/v2/feed/news',
+    '/api/v2/feed/news/<string:format>'
+)
+
+api.add_resource(TrackerStatus,
+    '/api/v2/tracker/status'
+)
 
 if __name__ == "__main__":
   app.run()
