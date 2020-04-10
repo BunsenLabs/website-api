@@ -6,6 +6,7 @@ from base64 import b64encode
 from hashlib import sha1
 from socket import error as SocketError
 from socketserver import ThreadingMixIn, TCPServer, StreamRequestHandler
+from queue import Queue
 import errno
 import logging
 import struct
@@ -114,7 +115,7 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
     clients = []
     id_counter = 0
 
-    def __init__(self, port, message_queue, host='127.0.0.1', loglevel=logging.WARNING):
+    def __init__(self, port: int, message_queue: Queue, host: str = '127.0.0.1', loglevel=logging.WARNING):
         logger.setLevel(loglevel)
         TCPServer.__init__(self, (host, port), WebSocketHandler)
         self.port = self.socket.getsockname()[1]
@@ -125,6 +126,7 @@ class WebsocketServer(ThreadingMixIn, TCPServer, API):
             try:
                 msg = self.message_queue.get_nowait()
                 self._multicast_(msg)
+                self.message_queue.task_done()
             except Exception:
                 pass
 
