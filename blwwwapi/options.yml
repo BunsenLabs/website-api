@@ -42,3 +42,15 @@ options:
     default: !Env [ 'workers', 'feed' ]
     help: |
       Specify which workers to start.
+
+  - names: [ '--event-server-enable' ]
+    default: False
+    action: store_true
+    help: |
+      Enable the WebSocket event server in addition to the REST API.
+
+  - names: [ '--event-server-port', '-P' ]
+    default: 9876
+    type: !!python/name:builtins.int ''
+    help: |
+      Event server WebSocket bind port.

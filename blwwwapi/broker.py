@@ -1,21 +1,28 @@
 from argparse import Namespace
-from blwwwapi.logging import named_logger
-from blwwwapi.workers.news import News
-from blwwwapi.workers.tracker import Tracker
-from queue import Queue, Empty
+from queue import Queue, Empty, Full
 from threading import Thread, Lock
+from typing import Callable, Optional
+import json
 import os
 import pickle
 import sys
+
+from blwwwapi.eventserver import EventServer
+from blwwwapi.logging import named_logger
+from blwwwapi.workers.news import News
+from blwwwapi.workers.tracker import Tracker
 
 EMPTY = {}
 
 class Broker(Thread):
   def __init__(self, opts: Namespace = Namespace()):
     self.data = {}
+    self.opts = opts
     self.logger = named_logger()
     self.queue = Queue(maxsize=512)
     self.workers = [ News, Tracker ]
+    self.event_server: Optional[EventServer] = None
+    self.event_server_queue: Optional[Queue] = None
     self.params = (opts,self.queue,)
     self.threads = []
     self.lock = Lock()
@@ -34,6 +41,11 @@ class Broker(Thread):
       w = cls(*self.params)
       w.start()
       self.threads.append(w)
+    if self.opts.event_server_enable:
+      self.event_server_queue = Queue()
+      self.event_server = EventServer(self.opts, self.event_server_queue)
+      self.event_server.start()
+      self.threads.append(self.event_server)
     while True:
       try:
         id, data = self.queue.get(block=True)
@@ -43,7 +55,7 @@ class Broker(Thread):
         except pickle.PickleError as err:
           self.logger.error(f"Failed to unpickle a message from worker: {id}")
           sys.exit(os.EX_PROTOCOL)
-          self._put(msg)
+        self._put(msg)
       except Empty:
         pass
 
@@ -54,6 +66,12 @@ class Broker(Thread):
     if self._check_namespace_access(id, endpoint):
       with self.lock:
         self.data[endpoint] = data
+    if self.event_server_queue is not None:
+      try:
+        self.event_server_queue.put(json.dumps(msg.payload), block=False)
+        self.logger.debug("Added event to event server queue: %s", msg)
+      except Full as err:
+        self.logger.warning("Failed to submit message to event server: %s", err)
 
   def _check_namespace_access(self, thread_id: str, endpoint: str) -> bool:
     if not endpoint.startswith(f"/{thread_id}"):
