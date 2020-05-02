@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
         name = "blwwwapi",
-        version = "1.0.6",
+        version = "1.0.7",
         install_requires = [
                 "flask",
                 "Flask-RESTful",
@@ -12,7 +12,8 @@ setup(
                 "Django",
                 "feedparser",
                 "requests",
-                "PyYAML>=5.1.1"
+                "PyYAML>=5.1.1",
+                "python-debian",
         ],
         packages = find_packages(),
         entry_points={

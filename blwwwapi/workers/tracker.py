@@ -2,7 +2,6 @@
 
 from blwwwapi.workers.base import WorkerBase
 from typing import Union, List
-import requests
 import time
 
 class Tracker(WorkerBase):
@@ -42,7 +41,7 @@ class Tracker(WorkerBase):
     def fetchot(self, param: str) -> Union[None, List[str]]:
         records = []
         try:
-            data = requests.get("{url}/stats?{params}".format(
+            data = self._session.get("{url}/stats?{params}".format(
               url=self._opts.tracker_url, params=param)).text
         except:
             return None

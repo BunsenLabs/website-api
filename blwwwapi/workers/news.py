@@ -7,7 +7,6 @@ from django.utils import feedgenerator
 from typing import List
 import datetime
 import feedparser
-import requests
 import time
 import uuid
 
@@ -33,7 +32,7 @@ class News(WorkerBase):
     date = "1999-01-01"
     fulltext = ""
     try:
-      body = requests.get(topic_url).text
+      body = self._session.get(topic_url).text
       soup = BeautifulSoup(body, "html.parser")
       op = soup.find("div", { "class": "blockpost1" })
       # Summary

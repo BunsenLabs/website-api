@@ -4,6 +4,7 @@ from blwwwapi.message import Message
 from queue import Queue
 from threading import Thread, Event
 import pickle
+import requests
 
 class WorkerBase(Thread):
   _id = None
@@ -15,6 +16,7 @@ class WorkerBase(Thread):
     self._stop_event = Event()
     self._waiter = Event()
     self._logger = named_logger(name=self._id)
+    self._session = requests.Session()
     self._lives = 3
     super().__init__(daemon=True)
 
