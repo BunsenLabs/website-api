@@ -1,11 +1,12 @@
-from blwwwapi.broker import Broker
-from blwwwapi.logging import named_logger
-from blwwwapi.options import get as getopts
 from flask import Flask, Response, make_response
 from flask_restful import Resource, Api
 
-opts = getopts()
-broker = Broker(opts)
+from .broker import Broker
+from .logging import named_logger
+from .settings import Settings
+
+settings = Settings()
+broker = Broker(settings)
 broker.start()
 
 app = Flask('blwwwapi')

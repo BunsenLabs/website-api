@@ -17,7 +17,7 @@ remove-container: | stop-container
 
 .PHONY: dist
 dist: setup.py
-	rm -- dist/*
+	rm -f -- dist/*
 	python setup.py sdist
 
 replace: | build-container remove-container start-container

@@ -1,16 +1,17 @@
-from argparse import Namespace
-from blwwwapi.logging import named_logger
-from blwwwapi.message import Message
 from queue import Queue
 from threading import Thread, Event
 import pickle
 
+from ..logging import named_logger
+from ..message import Message
+from ..settings import Settings
+
 class WorkerBase(Thread):
   _id = None
-  def __init__(self, opts: Namespace, queue: Queue):
+  def __init__(self, settings: Settings, queue: Queue):
     if self._id is None:
       self._id = "unknown"
-    self._opts = opts
+    self._settings = settings
     self._queue = queue
     self._stop_event = Event()
     self._waiter = Event()

@@ -17,11 +17,11 @@ class News(WorkerBase):
 
   def main(self):
     self._announcement_url = "{base_url}/extern.php?action=feed&fid=12&type=atom".format(
-        base_url=self._opts.forum_url)
+        base_url=self._settings.FORUM_URL)
     self._info_forum_url = "{base_url}/viewforum.php?id=12".format(
-        base_url=self._opts.forum_url)
+        base_url=self._settings.FORUM_URL)
     self.update_feed_data()
-    while not self._waiter.wait(timeout=self._opts.news_update_interval):
+    while not self._waiter.wait(timeout=self._settings.NEWS_UPDATE_INTERVAL):
       if self.is_stopped():
         return
       self.update_feed_data()

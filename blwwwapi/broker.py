@@ -1,22 +1,24 @@
 from argparse import Namespace
-from blwwwapi.logging import named_logger
-from blwwwapi.workers.news import News
-from blwwwapi.workers.tracker import Tracker
 from queue import Queue, Empty
 from threading import Thread, Lock
 import os
 import pickle
 import sys
 
+from .logging import named_logger
+from .settings import Settings
+from .workers.news import News
+from .workers.tracker import Tracker
+
 EMPTY = {}
 
 class Broker(Thread):
-  def __init__(self, opts: Namespace = Namespace()):
+  def __init__(self, settings: Settings):
     self.data = {}
     self.logger = named_logger()
     self.queue = Queue()
     self.workers = [ News, Tracker ]
-    self.params = (opts,self.queue,)
+    self.params = (settings, self.queue,)
     self.threads = []
     self.lock = Lock()
     super().__init__()

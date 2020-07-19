@@ -11,7 +11,7 @@ class Tracker(WorkerBase):
 
     def main(self):
         self.update_data()
-        while not self._waiter.wait(timeout=self._opts.tracker_update_interval):
+        while not self._waiter.wait(timeout=self._settings.TRACKER_UPDATE_INTERVAL):
             if self.is_stopped():
               return
             self.update_data()
@@ -42,8 +42,7 @@ class Tracker(WorkerBase):
     def fetchot(self, param: str) -> Union[None, List[str]]:
         records = []
         try:
-            data = requests.get("{url}/stats?{params}".format(
-              url=self._opts.tracker_url, params=param)).text
+            data = requests.get("{url}/stats?{params}".format(url=self._settings.TRACKER_URL)).text
         except:
             return None
         for line in data.split('\n'):
